@@ -135,6 +135,7 @@ class checkPageType {
 		var test = url.searchParams.get("test");
 
 		return test==='calc'
+		
 		//return true
 	}
 }
