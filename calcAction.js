@@ -110,8 +110,8 @@ class checkPageType {
 	}
 
 	isCalc () {
-		var title = $(".nome-produto.titulo:contains('Sob Medida')")
-		return $(title).length && this.sandbox()
+		var descricao = $("#descricao:contains('#rede-sobmedida')")
+		return $(descricao).length && this.sandbox()
 	}
 
 	isCheckcout () {
@@ -122,7 +122,8 @@ class checkPageType {
 		var url = new URL(window.location.href);
 		var test = url.searchParams.get("test");
 
-		return test==='calc'
+		//return test==='calc'
+		return true
 	}
 }
 
