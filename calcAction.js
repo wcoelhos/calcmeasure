@@ -48,7 +48,19 @@ class enableCheckcoutPage {
 		this.observationsInput = $('textarea[name=cliente_obs]').first()
 		this.observationsInput.val(this.getTextAreas())
 
-		$(this.observationsInput).parents('.caixa-sombreada').css('opacity', '0.3')
+		var newObservacao = $(this.observationsInput)
+		.clone()
+		.css('height', '100px')
+		.prop('disabled', true)
+		.prop('name', '')
+		.prop('id', '')
+		.insertAfter(this.observationsInput);
+
+		$(this.observationsInput)
+		.css('width', 0)
+		//.css('height', 0)
+		.css('position', 'absolute')
+		.css('opacity', 0)
 	}
 
 	getCheckoutSkus () {
@@ -122,8 +134,8 @@ class checkPageType {
 		var url = new URL(window.location.href);
 		var test = url.searchParams.get("test");
 
-		//return test==='calc'
-		return true
+		return test==='calc'
+		//return true
 	}
 }
 
