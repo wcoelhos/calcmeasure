@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />	
+	<title></title>
+	<script
+	  src="https://code.jquery.com/jquery-3.3.1.min.js"
+	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	  crossorigin="anonymous"></script>
+	<script
+	  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+	  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+	  crossorigin="anonymous"></script>
+
+	 <script type="text/javascript" src="calc.js"></script>
+   <script type="text/javascript" src="calcAction.js"></script>
+	 <link rel="stylesheet" type="text/css" href="calc.css">
+</head>
+<body>
+
+	<table class="table tabela-carrinho borda-alpha" border="1">
+      <thead class="cor-secundaria">
+        <tr><th><h6>Produtos</h6></th>
+        <th width="80"><h6>Qtd.</h6></th>
+        <th class="padding-preco" width="140"><div><h6 style="margin-left: 10px;">Preço</h6></div></th>
+      </tr></thead>
+      
+        <tbody><tr>
+          <td class="phone-pullleft" data-produto-id="4031145" data-produto-quantidade="100">
+            <div class="produto-info">
+              Rede de Proteção Esportiva Sob Medida Para Campo/Quadra de Futebol e Society Fio 2 Malha 15cm
+              <ul>
+                <li>
+                  <span>
+                    SKU:
+                    <strong>
+                      M005Amarela
+                    </strong>
+                  </span>
+                </li>
+                
+                  
+                    <li>
+                      <span>
+                        Cor:
+                        
+                          <span class="atributo-cor-carrinho">
+                            <span style="background-color: #FFFFFF;"></span>
+                            
+                          </span>
+                        
+                      </span>
+                    </li>
+                  
+                
+              </ul>
+            </div>
+          </td>
+          <td class="conteiner-qtd">
+            <div>100</div>
+          </td>
+          <td class="conteiner-preco padding-preco">
+            <div class="preco-produto">
+              <strong class="preco-promocional cor-principal titulo">
+                R$ 219,00
+              </strong>
+            </div>
+          </td>
+        </tr>
+      
+        <tr>
+          <td class="phone-pullleft" data-produto-id="4031033" data-produto-quantidade="400">
+            <div class="produto-info">
+              Rede de Proteção Esportiva Sob Medida Para Campo/Quadra de Futebol e Society Fio 2 Malha 15cm
+              <ul>
+                <li>
+                  <span>
+                    SKU:
+                    <strong>
+                      M005Azul
+                    </strong>
+                  </span>
+                </li>
+                
+                  
+                    <li>
+                      <span>
+                        Cor:
+                        
+                          <span class="atributo-cor-carrinho">
+                            <span style="background-color: #1717FF;"></span>
+                            
+                          </span>
+                        
+                      </span>
+                    </li>
+                  
+                
+              </ul>
+            </div>
+          </td>
+          <td class="conteiner-qtd">
+            <div>400</div>
+          </td>
+          <td class="conteiner-preco padding-preco">
+            <div class="preco-produto">
+              <strong class="preco-promocional cor-principal titulo">
+                R$ 876,00
+              </strong>
+            </div>
+          </td>
+        </tr>
+      
+      <tr class="bg-dark esconder-mobile">
+        <td>&nbsp;</td>
+        <td class="text-right">
+          <span>Subtotal:</span>
+        </td>
+        <td class="padding-preco">
+          <div class="subtotal" data-subtotal="1.095,00" data-float="1095.0">
+            <strong class="titulo cor-principal">
+              R$ 1.095,00
+            </strong>
+          </div>
+        </td>
+      </tr>
+      <tr class="bg-dark esconder-mobile tr-checkout-frete hide" style="display: table-row;">
+        <td>&nbsp;</td>
+        <td class="text-right">
+          <span>Frete:</span>
+        </td>
+        <td class="padding-preco">
+          <div class="frete-preco">
+            <small class="muted">(defina abaixo)</small>
+            <strong class="titulo cor-principal hide">
+              R$ 0,00
+            </strong>
+          </div>
+        </td>
+      </tr>
+      
+      
+        <tr class="bg-dark esconder-mobile desconto-tr hide" style="">
+          <td>&nbsp;</td>
+          <td class="text-right">
+            <span>Desconto à vista:</span>
+            <small class="hide texto-aplicar-total muted">(frete não incluso)</small>
+          </td>
+          <td class="padding-preco">
+            <div class="desconto-preco">
+              <strong class="titulo cor-principal">R$ 0,00</strong>
+            </div>
+          </td>
+        </tr>
+      
+      <tr class="bg-dark tr-checkout-total hide" style="display: table-row;">
+        <td colspan="2" class="text-right hidden-phone">
+          <span>Total:</span>
+        </td>
+        <td class="padding-preco">
+          <span class="visible-phone">Total:</span>
+          <div class="total" data-total="1095.0">
+            <strong class="titulo cor-principal preco-carrinho-total">R$ 1.095,00</strong>
+          </div>
+        </td>
+      </tr>
+    </tbody></table>
+
+    <fieldset data-recording-ignore="events">
+      <legend class="titulo cor-secundaria"><i class="icon-comment"></i>Sob Medida.</legend>
+      <div id="formularioObservacao" class="control-group ">
+        <p class="help-block ">Caso o produto escolhido seja Sob Medida, digite aqui as medidas:</p>
+        <textarea rows="3" class="input-block-level sem-margem" name="cliente_obs" form="formularioCheckout" style="width: 100%; height: 300px"></textarea>
+      </div>
+    </fieldset>
+
+</body>
+</html>
