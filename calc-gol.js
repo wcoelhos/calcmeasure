@@ -6,7 +6,7 @@ class CalcGol {
 		var html = ''
 			html += '<div class="calcarea">'
 			html += '	<div class="calcarea-header danger">'
-			html += '		Informe abaixo as medidas da rede'
+			html += '		Informe abaixo as medidas (em metros) da rede'
 			html += '	</div>'
 			html += '	<form action="javascript:void(0)" class="calcarea-form">'
 			html += '		<div>'
@@ -88,7 +88,7 @@ class CalcGol {
 		if (this.isFilled()) {
 			$(this.divHeader).removeClass('danger').text('Medidas informadas corretamente!')
 		} else {
-			$(this.divHeader).addClass('danger').text('Informe abaixo as medidas da rede')
+			$(this.divHeader).addClass('danger').text('Informe abaixo as medidas (em metros) da rede')
 		}
 	}
 

@@ -44,6 +44,7 @@
 			width: 100%;
 			box-sizing: border-box;
 			padding: 0.5em;
+			margin: 0 !important;
 			min-height: 2.3rem;
 			border-radius: 4px;
 			font-size: 1rem;
