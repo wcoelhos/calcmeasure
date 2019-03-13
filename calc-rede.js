@@ -1,4 +1,4 @@
-class Area {
+class CalcRede {
 
 	constructor(target) {
 		this.areas = []
@@ -104,26 +104,30 @@ class Area {
 	}
 
 	submit (form) {
-		var _self = this
-		var valAltura = _self.parseNumber(this.inputAltura.val())
-		var valComprimento = _self.parseNumber(this.inputComprimento.val())
+		var valAltura = this.parseNumber(this.inputAltura.val())
+		var valComprimento = this.parseNumber(this.inputComprimento.val())
 
 		if (valAltura && valComprimento) {
-			_self.addArea({
+			this.addArea({
 				altura: valAltura,
 				comprimento: valComprimento,
 				area: Math.round(valAltura * valComprimento)
 			})
-			_self.inputAltura.removeClass('input-error').val('')
-			_self.inputComprimento.removeClass('input-error').val('')
+			this.inputAltura.removeClass('input-error').val('')
+			this.inputComprimento.removeClass('input-error').val('')
 		} else {
-			if (!valAltura) _self.inputAltura.addClass('input-error')
-			if (!valComprimento) _self.inputComprimento.addClass('input-error')
+			if (!valAltura) this.inputAltura.addClass('input-error')
+			if (!valComprimento) this.inputComprimento.addClass('input-error')
 		}
 	}
 
-	getAreas () {
+	getTextAreas () {
+		var _self = this
+
 		return this.areas
+		.map(function (area) {
+			return ""+_self.formatNumber(area.altura)+"m x "+_self.formatNumber(area.comprimento)+"m ("+_self.formatNumber(area.area)+"m)"
+		}).join("\r\n")
 	}
 
 	change (func) {

@@ -1,12 +1,19 @@
 class enableCalcPage {
  
-	constructor(target) {
-		this.calc = new Area('.info-principal-produto')
+	constructor(type) {
+
+		if (type === 'rede') {
+			this.calc = new CalcRede('.info-principal-produto')	
+		}
+		if (type === 'gol') {
+			this.calc = new CalcGol('.info-principal-produto')	
+		}
+		
 
 		var _self = this
 		$('.botao.botao-comprar.principal.grande:not(.desativo)').click(function(e) {
 			_self.recordAreas(e.target)
-		})//.attr('href', '#')
+		}).attr('href', '#')
 
 		this.calc.change(function (areas) {
 			_self.applyQtd(areas)
@@ -15,11 +22,11 @@ class enableCalcPage {
 
 	recordAreas (target) {
 		var sku = $(target).parents('.acoes-produto').find('meta[itemprop=sku]').prop('content')
-		
+
 		if (sku) {
-			var areas = JSON.stringify(this.calc.getAreas())
+			var areas = this.calc.getTextAreas()
 			localStorage.setItem(sku, areas)
-			console.log('Adicinado:', sku, areas)
+			console.log(sku, ":", areas)
 		}
 	}
 
@@ -37,6 +44,7 @@ class enableCalcPage {
 		} else {
 			var sum = 0
 		}
+
 		qtdInput.val(sum)
 		qtdInput.change()
 	}
@@ -58,9 +66,26 @@ class enableCheckcoutPage {
 
 		$(this.observationsInput)
 		.css('width', 0)
-		//.css('height', 0)
 		.css('position', 'absolute')
 		.css('opacity', 0)
+	}
+
+	getTextAreas () {
+		return this
+		.getCheckoutSkus()
+		.map(function (sku, index) {
+			var textAreas = localStorage.getItem(sku)
+
+			if (sku && textAreas) {
+				return ["SKU: "+sku, textAreas].join("\r\n")	
+			} else {
+				return null
+			}
+		})
+		.filter(function (v) {
+			return v
+		})
+		.join("\r\n\r\n")
 	}
 
 	getCheckoutSkus () {
@@ -70,40 +95,6 @@ class enableCheckcoutPage {
 			if (sku) items.push(sku)
 		})
 		return items
-	}
-
-	getAreasFromSkus () {
-		var checkoutSkus = this.getCheckoutSkus()
-
-		var items = []
-		checkoutSkus.forEach(function (sku, index) {
-			var areas = localStorage.getItem(sku)
-
-			if (sku && areas) {
-				items.push({
-					sku: sku,
-					areas: JSON.parse(areas)
-				})
-			}
-		})
-		return items
-	}
-
-	getTextAreas () {
-		var _self = this
-		var skus = this.getAreasFromSkus()
-
-		return skus.map(function (val) {
-			var areas = val.areas.map(function (area) {
-				return ""+_self.formatNumber(area.altura)+"m x "+_self.formatNumber(area.comprimento)+"m ("+_self.formatNumber(area.area)+"m)"
-			}).join("\r\n")
-
-			return [
-				"SKU: "+val.sku,
-				areas
-			].join("\r\n")
-
-		}).join("\r\n\r\n")
 	}
 
 	formatNumber (num) {
@@ -121,8 +112,13 @@ class checkPageType {
 	constructor() {
 	}
 
-	isCalc () {
+	isCalcRede () {
 		var descricao = $("#descricao:contains('#rede-sobmedida')")
+		return $(descricao).length && this.sandbox()
+	}
+
+	isCalcGol () {
+		var descricao = $("#descricao:contains('#gol-sobmedid')")
 		return $(descricao).length && this.sandbox()
 	}
 
@@ -135,7 +131,6 @@ class checkPageType {
 		var test = url.searchParams.get("test");
 
 		return test==='calc'
-		
 		//return true
 	}
 }
@@ -145,26 +140,20 @@ $(document).ready(function () {
 
 	var pageType = new checkPageType
 
-	if (pageType.isCalc()) {
-		console.log('isCalcPage')
-		new enableCalcPage
+	if (pageType.isCalcRede()) {
+		console.log('isCalcRede')
+		new enableCalcPage('rede')
+	}
+	if (pageType.isCalcGol()) {
+		console.log('isCalcGol')
+		new enableCalcPage('gol')
 	}
 	if (pageType.isCheckcout()) {
 		console.log('isCheckcoutPage')
-		new enableCheckcoutPage
+		new enableCheckcoutPage()
 	}
-
-	
 	if (pageType.sandbox()) {
-		$('.calc-gismar02').hide()
-
-		/*
-		$('a').each(function (index, item) {
-			var url = new URL($(item).prop('href'));
-			url.searchParams.set("test", "calc");
-			$(item).prop('href', url)
-		})
-		*/
+		$('.calc-gismar01, .calc-gismar02').hide()
 	}
 
 })

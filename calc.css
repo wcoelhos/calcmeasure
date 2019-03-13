@@ -12,9 +12,13 @@
 		color: #ffff;
 		padding: 0.5rem;
 	}
+	.calcarea > .calcarea-header.danger {
+		background: #ffc107;
+	}
 	/*calcarea-form*/
 	.calcarea > .calcarea-form{
 		display: flex;
+		flex-wrap: wrap;
 		margin: 0;
 		padding: 0;
 	}
@@ -22,6 +26,10 @@
 			flex: 1;
 			padding: 0.5rem;
 			border-right: 1px solid rgba(0,0,0,0.1);
+		}
+		.calcarea > .calcarea-form > *.breakline{
+			padding: 0;
+			min-width: 100%;
 		}
 		.calcarea > .calcarea-form > * > label {
 			display: block;
@@ -79,4 +87,10 @@
 		}
 		.calcarea > ul.calcarea-list > li a.remove:hover{
 			background: rgba(0,0,0,0.8);
+		}
+	.calcarea > .image{
+		padding: 0.5em; 
+	}
+		.calcarea > .image img{
+			width: 100%;
 		}
