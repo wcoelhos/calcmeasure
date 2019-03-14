@@ -7,7 +7,7 @@ class enableCalcPageRede {
 		var _self = this
 		$('.botao.botao-comprar.principal.grande:not(.desativo)').click(function(e) {
 			_self.recordAreas(e.target)
-		}).attr('href', '#')
+		})//.attr('href', '#')
 
 		this.calc.change(function (areas) {
 			_self.applyQtd(areas)
@@ -53,7 +53,7 @@ class enableCalcPageGol {
 		var _self = this
 		$('.botao.botao-comprar.principal.grande:not(.desativo)').click(function(e) {
 			_self.recordAreas(e.target)
-		}).attr('href', '#')
+		})//.attr('href', '#')
 	}
 
 	recordAreas (target) {
