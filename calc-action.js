@@ -1,19 +1,13 @@
-class enableCalcPage {
+class enableCalcPageRede {
  
-	constructor(type) {
+	constructor() {
 
-		if (type === 'rede') {
-			this.calc = new CalcRede('.info-principal-produto')	
-		}
-		if (type === 'gol') {
-			this.calc = new CalcGol('.info-principal-produto')	
-		}
-		
+		this.calc = new CalcRede('.info-principal-produto')	
 
 		var _self = this
 		$('.botao.botao-comprar.principal.grande:not(.desativo)').click(function(e) {
 			_self.recordAreas(e.target)
-		})//.attr('href', '#')
+		}).attr('href', '#')
 
 		this.calc.change(function (areas) {
 			_self.applyQtd(areas)
@@ -47,6 +41,29 @@ class enableCalcPage {
 
 		qtdInput.val(sum)
 		qtdInput.change()
+	}
+}
+
+class enableCalcPageGol {
+ 
+	constructor(type) {
+
+		this.calc = new CalcGol('.info-principal-produto', type)
+
+		var _self = this
+		$('.botao.botao-comprar.principal.grande:not(.desativo)').click(function(e) {
+			_self.recordAreas(e.target)
+		}).attr('href', '#')
+	}
+
+	recordAreas (target) {
+		var sku = $(target).parents('.acoes-produto').find('meta[itemprop=sku]').prop('content')
+
+		if (sku) {
+			var areas = this.calc.getTextAreas()
+			localStorage.setItem(sku, areas)
+			console.log(sku, ":", areas)
+		}
 	}
 }
 
@@ -112,13 +129,23 @@ class checkPageType {
 	constructor() {
 	}
 
-	isCalcRede () {
+	isRedeSobMedida () {
 		var descricao = $("#descricao:contains('#rede-sobmedida')")
 		return $(descricao).length && this.sandbox()
 	}
 
-	isCalcGol () {
-		var descricao = $("#descricao:contains('#gol-sobmedid')")
+	isGolFutsal () {
+		var descricao = $("#descricao:contains('#gol-sobmedida-futsal')")
+		return $(descricao).length && this.sandbox()
+	}
+	
+	isGolSociety () {
+		var descricao = $("#descricao:contains('#gol-sobmedida-society')")
+		return $(descricao).length && this.sandbox()
+	}
+
+	isGolCampo () {
+		var descricao = $("#descricao:contains('#gol-sobmedida-campo')")
 		return $(descricao).length && this.sandbox()
 	}
 
@@ -140,18 +167,31 @@ $(document).ready(function () {
 
 	var pageType = new checkPageType
 
-	if (pageType.isCalcRede()) {
-		console.log('isCalcRede')
-		new enableCalcPage('rede')
+	if (pageType.isRedeSobMedida()) {
+		console.log('isRedeSobMedida')
+		new enableCalcPageRede()
 	}
-	if (pageType.isCalcGol()) {
-		console.log('isCalcGol')
-		new enableCalcPage('gol')
+	
+	if (pageType.isGolFutsal()) {
+		console.log('isGolFutsal')
+		new enableCalcPageGol('futsal')
 	}
+	
+	if (pageType.isGolSociety()) {
+		console.log('isGolSociety')
+		new enableCalcPageGol('society')
+	}
+	
+	if (pageType.isGolCampo()) {
+		console.log('isGolCampo')
+		new enableCalcPageGol('campo')
+	}
+	
 	if (pageType.isCheckcout()) {
-		console.log('isCheckcoutPage')
+		console.log('isCheckcout')
 		new enableCheckcoutPage()
 	}
+
 	if (pageType.sandbox()) {
 		$('.calc-gismar01, .calc-gismar02').hide()
 	}

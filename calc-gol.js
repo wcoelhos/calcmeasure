@@ -1,6 +1,6 @@
 class CalcGol {
 
-	constructor(target) {
+	constructor(target, type) {
 		this.medidas = null
 
 		var html = ''
@@ -10,21 +10,21 @@ class CalcGol {
 			html += '	</div>'
 			html += '	<form action="javascript:void(0)" class="calcarea-form">'
 			html += '		<div>'
-			html += '			<label>Comprimento</label>'
-			html += '			<input type="text" name="comprimento" placeholder="0,00">'
+			html += '			<label>Travessão</label>'
+			html += '			<input type="text" name="travessao" placeholder="0,00" maxlength="3">'
 			html += '		</div>'
 			html += '		<div>'
 			html += '			<label>Recuo Superior</label>'
-			html += '			<input type="text" name="recuo-superior" placeholder="0,00">'
+			html += '			<input type="text" name="recuo-superior" placeholder="0,00" maxlength="3">'
 			html += '		</div>'
 			html += '		<div class="breakline"></div>'
 			html += '		<div>'
 			html += '			<label>Altura</label>'
-			html += '			<input type="text" name="altura" placeholder="0,00">'
+			html += '			<input type="text" name="altura" placeholder="0,00" maxlength="3">'
 			html += '		</div>'
 			html += '		<div>'
 			html += '			<label>Recuo Inferior</label>'
-			html += '			<input type="text" name="recuo-inferior" placeholder="0,00">'
+			html += '			<input type="text" name="recuo-inferior" placeholder="0,00" maxlength="3">'
 			html += '		</div>'
 			html += '	</form>'
 			html += '	<div class="image"><img src="https://cdn.jsdelivr.net/gh/wcoelhos/calcmeasure@0.0.4/img/gol-medidas.jpg"></div>'
@@ -32,21 +32,58 @@ class CalcGol {
 
 		this.calcarea = $(html)
 		this.calcareaForm = $(this.calcarea).find('.calcarea-form')
-		this.inputComprimento = $(this.calcareaForm).find('input[name="comprimento"]')
+		this.inputTravessao = $(this.calcareaForm).find('input[name="travessao"]')
 		this.inputAltura = $(this.calcareaForm).find('input[name="altura"]')
 		this.inputRecuoSuperior = $(this.calcareaForm).find('input[name="recuo-superior"]')
 		this.inputRecuoInferior = $(this.calcareaForm).find('input[name="recuo-inferior"]')
 		this.divHeader = $(this.calcarea).find('.calcarea-header')
-		
-		this.changeFunc = null
 
-		$(this.inputComprimento).maskMoney({thousands:'.', decimal:','});
-		$(this.inputAltura).maskMoney({thousands:'.', decimal:','});
-		$(this.inputRecuoSuperior).maskMoney({thousands:'.', decimal:','});
-		$(this.inputRecuoInferior).maskMoney({thousands:'.', decimal:','});
+		if (type === 'futsal') {
+			this.limits = {
+				travessao: {min: 1.50, max: 3.30},
+				altura: {min: 1.50, max: 2.50},
+				recuoSuperior: {min: 0, max: 1.50},
+				recuoInferior: {min: 0.40, max: 1.50}
+			}
+		}
+		if (type === 'society') {
+			this.limits = {
+				travessao: {min: 3.31, max: 6.50},
+				altura: {min: 1.50,  max: 2.50},
+				recuoSuperior: {min: 0, max: 2.50},
+				recuoInferior: {min: 0.40, max: 2.50}
+			}
+		}
+		if (type === 'campo') {
+			this.limits = {
+				travessao: {min: 6.51, max: 7.60},
+				altura: {min: 1.50,  max: 2.60},
+				recuoSuperior: {min: 0, max: 2.50},
+				recuoInferior: {min: 0.40, max: 2.50}
+			}
+		}
 
+		this.setActions()
 		$(target).append(this.calcarea)
 		this.start()
+	}
+
+	setActions () {
+		$(this.inputTravessao)
+		.maskMoney({thousands:'.', decimal:','})
+		.prop('placeholder', this.formatNumber(this.limits.travessao.min) + ' até ' + this.formatNumber(this.limits.travessao.max) + 'm');
+		
+		$(this.inputAltura)
+		.maskMoney({thousands:'.', decimal:','})
+		.prop('placeholder', this.formatNumber(this.limits.altura.min) + ' até ' + this.formatNumber(this.limits.altura.max) + 'm');
+	
+		$(this.inputRecuoSuperior)
+		.maskMoney({thousands:'.', decimal:','})
+		.prop('placeholder', this.formatNumber(this.limits.recuoSuperior.min) + ' até ' + this.formatNumber(this.limits.recuoSuperior.max) + 'm');
+
+		$(this.inputRecuoInferior)
+		.maskMoney({thousands:'.', decimal:','})
+		.prop('placeholder', this.formatNumber(this.limits.recuoInferior.min) + ' até ' + this.formatNumber(this.limits.recuoInferior.max) + 'm');
 	}
 
 	parseNumber (num) {
@@ -73,7 +110,7 @@ class CalcGol {
 
 	getValues () {
 		return {
-			comprimento: this.parseNumber(this.inputComprimento.val()),
+			travessao: this.parseNumber(this.inputTravessao.val()),
 			altura: this.parseNumber(this.inputAltura.val()),
 			recuoSuperior: this.parseNumber(this.inputRecuoSuperior.val()),
 			recuoInferior: this.parseNumber(this.inputRecuoInferior.val())
@@ -81,7 +118,10 @@ class CalcGol {
 	}
 
 	isFilled () {
-		return this.getValues().comprimento && this.getValues().altura && this.getValues().recuoSuperior && this.getValues().recuoInferior
+		return this.isValid(this.getValues().travessao, 'travessao')
+		&& this.isValid(this.getValues().altura, 'altura')
+		&& this.isValid(this.getValues().recuoSuperior, 'recuoSuperior')
+		&& this.isValid(this.getValues().recuoInferior, 'recuoInferior')
 	}
 
 	submit (form) {
@@ -95,7 +135,7 @@ class CalcGol {
 	getTextAreas () {
 		if (this.isFilled()) {
 			return [
-				this.formatNumber(this.getValues().comprimento)+"m (comprimento)",
+				this.formatNumber(this.getValues().travessao)+"m (travessao)",
 				this.formatNumber(this.getValues().altura)+"m (altura)",
 				this.formatNumber(this.getValues().recuoSuperior)+"m (recuo superior)",
 				this.formatNumber(this.getValues().recuoInferior)+"m (recuo inferior)"
@@ -105,27 +145,58 @@ class CalcGol {
 		}
 	}
 
-	change (func) {
-		this.changeFunc = func
+	isValid (value, medida) {
+		return value && value >= this.limits[medida].min && value <= this.limits[medida].max
 	}
 
 	start (target) {
 		var _self = this
-		$(_self.inputComprimento).keyup(function (el) {
+		$(_self.inputTravessao)
+		.keyup(function (el) {
 			$(el.target).removeClass('input-error')
 			_self.submit()
 		})
-		$(_self.inputAltura).keyup(function (el) {
+		.blur(function (el) {
+			var value = _self.parseNumber(el.target.value)
+			if (value && !_self.isValid(value, 'travessao')) {
+				$(el.target).addClass('input-error')
+			}
+		})
+
+		$(_self.inputAltura)
+		.keyup(function (el) {
 			$(el.target).removeClass('input-error')
 			_self.submit()
 		})
-		$(_self.inputRecuoSuperior).keyup(function (el) {
+		.blur(function (el) {
+			var value = _self.parseNumber(el.target.value)
+			if (value && !_self.isValid(value, 'altura')) {
+				$(el.target).addClass('input-error')
+			}
+		})
+
+		$(_self.inputRecuoSuperior)
+		.keyup(function (el) {
 			$(el.target).removeClass('input-error')
 			_self.submit()
 		})
-		$(_self.inputRecuoInferior).keyup(function (el) {
+		.blur(function (el) {
+			var value = _self.parseNumber(el.target.value)
+			if (value && !_self.isValid(value, 'recuoSuperior')) {
+				$(el.target).addClass('input-error')
+			}
+		})
+
+		$(_self.inputRecuoInferior)
+		.keyup(function (el) {
 			$(el.target).removeClass('input-error')
 			_self.submit()
+		})
+		.blur(function (el) {
+			var value = _self.parseNumber(el.target.value)
+			if (value && !_self.isValid(value, 'recuoInferior')) {
+				$(el.target).addClass('input-error')
+			}
 		})
 	}
 }

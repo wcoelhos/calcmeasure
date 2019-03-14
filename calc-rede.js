@@ -139,6 +139,7 @@ class CalcRede {
 		$(this.calcareaForm).submit(function (el) {
 			_self.submit()
 		})
+		
 		$(_self.inputAltura).keypress(function (el) {
 			$(el.target).removeClass('input-error')
 		})
