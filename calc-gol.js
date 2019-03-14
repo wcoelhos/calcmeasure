@@ -27,7 +27,7 @@ class CalcGol {
 			html += '			<input type="text" name="recuo-inferior" placeholder="0,00" maxlength="3">'
 			html += '		</div>'
 			html += '	</form>'
-			html += '	<div class="image"><img src="https://cdn.jsdelivr.net/gh/wcoelhos/calcmeasure@0.0.4/img/gol-medidas.jpg"></div>'
+			html += '	<div class="image"><img src="https://cdn.jsdelivr.net/gh/wcoelhos/calcmeasure@0.0.6/img/gol-medidas.jpg"></div>'
 			html += '</div>'
 
 		this.calcarea = $(html)
