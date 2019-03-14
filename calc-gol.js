@@ -42,7 +42,7 @@ class CalcGol {
 			this.limits = {
 				travessao: {min: 1.50, max: 3.30},
 				altura: {min: 1.50, max: 2.50},
-				recuoSuperior: {min: 0, max: 1.50},
+				recuoSuperior: {min: 0.01, max: 1.50},
 				recuoInferior: {min: 0.40, max: 1.50}
 			}
 		}
@@ -50,7 +50,7 @@ class CalcGol {
 			this.limits = {
 				travessao: {min: 3.31, max: 6.50},
 				altura: {min: 1.50,  max: 2.50},
-				recuoSuperior: {min: 0, max: 2.50},
+				recuoSuperior: {min: 0.01, max: 2.50},
 				recuoInferior: {min: 0.40, max: 2.50}
 			}
 		}
@@ -58,7 +58,7 @@ class CalcGol {
 			this.limits = {
 				travessao: {min: 6.51, max: 7.60},
 				altura: {min: 1.50,  max: 2.60},
-				recuoSuperior: {min: 0, max: 2.50},
+				recuoSuperior: {min: 0.01, max: 2.50},
 				recuoInferior: {min: 0.40, max: 2.50}
 			}
 		}
@@ -146,7 +146,7 @@ class CalcGol {
 	}
 
 	isValid (value, medida) {
-		return value && value >= this.limits[medida].min && value <= this.limits[medida].max
+		return value >= this.limits[medida].min && value <= this.limits[medida].max
 	}
 
 	start (target) {
