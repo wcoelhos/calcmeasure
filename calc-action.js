@@ -9,8 +9,15 @@ class enableCalcPageRede {
 			_self.recordAreas(e.target)
 		})//.attr('href', '#')
 
+
+		$('.comprar').hide()
 		this.calc.change(function (areas) {
-			_self.applyQtd(areas)
+			if (areas.length) {
+				$('.comprar').show()
+				_self.applyQtd(areas)
+			} else {
+				$('.comprar').hide()
+			}
 		})
 	}
 
@@ -49,11 +56,20 @@ class enableCalcPageGol {
 	constructor(type) {
 
 		this.calc = new CalcGol('.info-principal-produto', type)
-
+		
 		var _self = this
 		$('.botao.botao-comprar.principal.grande:not(.desativo)').click(function(e) {
 			_self.recordAreas(e.target)
 		})//.attr('href', '#')
+
+		$('.comprar').hide()
+		this.calc.change(function (areas, filled) {
+			if (filled) {
+				$('.comprar').show()
+			} else {
+				$('.comprar').hide()
+			}
+		})
 	}
 
 	recordAreas (target) {
@@ -70,21 +86,27 @@ class enableCalcPageGol {
 class enableCheckcoutPage {
 
 	constructor() {
+		var value = this.getTextAreas()
+
 		this.observationsInput = $('textarea[name=cliente_obs]').first()
-		this.observationsInput.val(this.getTextAreas())
+		this.observationsInput.val(value)
 
-		var newObservacao = $(this.observationsInput)
-		.clone()
-		.css('height', '100px')
-		.prop('disabled', true)
-		.prop('name', '')
-		.prop('id', '')
-		.insertAfter(this.observationsInput);
+		if (value) {
+			var newObservacao = $(this.observationsInput)
+			.clone()
+			.css('height', '140px')
+			.prop('disabled', true)
+			.prop('name', '')
+			.prop('id', '')
+			.insertAfter(this.observationsInput);
 
-		$(this.observationsInput)
-		.css('width', 0)
-		.css('position', 'absolute')
-		.css('opacity', 0)
+			$(this.observationsInput)
+			.css('width', 0)
+			.css('position', 'absolute')
+			.css('opacity', 0)
+		} else {
+			$(this.observationsInput).parents('.caixa-sombreada').hide()
+		}
 	}
 
 	getTextAreas () {

@@ -40,7 +40,8 @@ class CalcGol {
 		this.inputAltura = $(this.calcareaForm).find('input[name="altura"]')
 		this.inputRecuoSuperior = $(this.calcareaForm).find('input[name="recuo-superior"]')
 		this.inputRecuoInferior = $(this.calcareaForm).find('input[name="recuo-inferior"]')
-		this.divHeader = $(this.calcarea).find('.calcarea-header')
+		this.divHeader = $(this.calcarea).find('.calcarea-header') 
+		this.changeFunc = null
 
 		if (type === 'futsal') {
 			this.limits = {
@@ -138,6 +139,10 @@ class CalcGol {
 		} else {
 			$(this.divHeader).addClass('danger').text('Informe abaixo as medidas (em metros) da rede')
 		}
+
+		if (this.changeFunc) {
+			this.changeFunc(this.getValues(), this.isFilled())
+		}
 	}
 
 	getTextAreas () {
@@ -155,6 +160,10 @@ class CalcGol {
 
 	isValid (value, medida) {
 		return value >= this.limits[medida].min && value <= this.limits[medida].max
+	}
+
+	change (func) {
+		this.changeFunc = func
 	}
 
 	start (target) {
