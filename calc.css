@@ -26,10 +26,12 @@
 			flex: 1;
 			padding: 0.5rem;
 			border-right: 1px solid rgba(0,0,0,0.1);
+			border-bottom: 1px solid rgba(0,0,0,0.1);
 		}
 		.calcarea > .calcarea-form > *.breakline{
 			padding: 0;
 			min-width: 100%;
+			border: 0;
 		}
 		.calcarea > .calcarea-form > * > label {
 			display: block;
@@ -55,6 +57,11 @@
 		}
 		.calcarea > .calcarea-form > * > input.input-error{
 			border: 1px solid red !important;
+		}
+		.calcarea > .calcarea-form > * > small{
+			font-size: 0.75em;
+			line-height: 1.2em;
+			color: rgba(0,0,0,0.6);
 		}
 		.calcarea > .calcarea-form > * > button {
 			cursor: pointer;

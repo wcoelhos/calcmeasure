@@ -12,19 +12,23 @@ class CalcGol {
 			html += '		<div>'
 			html += '			<label>Travessão</label>'
 			html += '			<input type="text" name="travessao" placeholder="0,00" maxlength="3">'
+			html += '			<small></small>'
 			html += '		</div>'
 			html += '		<div>'
 			html += '			<label>Recuo Superior</label>'
 			html += '			<input type="text" name="recuo-superior" placeholder="0,00" maxlength="3">'
+			html += '			<small></small>'
 			html += '		</div>'
 			html += '		<div class="breakline"></div>'
 			html += '		<div>'
 			html += '			<label>Altura</label>'
 			html += '			<input type="text" name="altura" placeholder="0,00" maxlength="3">'
+			html += '			<small></small>'
 			html += '		</div>'
 			html += '		<div>'
 			html += '			<label>Recuo Inferior</label>'
 			html += '			<input type="text" name="recuo-inferior" placeholder="0,00" maxlength="3">'
+			html += '			<small></small>'
 			html += '		</div>'
 			html += '	</form>'
 			html += '	<div class="image"><img src="https://cdn.jsdelivr.net/gh/wcoelhos/calcmeasure@0.0.6/img/gol-medidas.jpg"></div>'
@@ -42,7 +46,7 @@ class CalcGol {
 			this.limits = {
 				travessao: {min: 1.50, max: 3.30},
 				altura: {min: 1.50, max: 2.50},
-				recuoSuperior: {min: 0.01, max: 1.50},
+				recuoSuperior: {min: 0.00, max: 1.50},
 				recuoInferior: {min: 0.40, max: 1.50}
 			}
 		}
@@ -50,7 +54,7 @@ class CalcGol {
 			this.limits = {
 				travessao: {min: 3.31, max: 6.50},
 				altura: {min: 1.50,  max: 2.50},
-				recuoSuperior: {min: 0.01, max: 2.50},
+				recuoSuperior: {min: 0.00, max: 2.50},
 				recuoInferior: {min: 0.40, max: 2.50}
 			}
 		}
@@ -58,7 +62,7 @@ class CalcGol {
 			this.limits = {
 				travessao: {min: 6.51, max: 7.60},
 				altura: {min: 1.50,  max: 2.60},
-				recuoSuperior: {min: 0.01, max: 2.50},
+				recuoSuperior: {min: 0.00, max: 2.50},
 				recuoInferior: {min: 0.40, max: 2.50}
 			}
 		}
@@ -70,20 +74,24 @@ class CalcGol {
 
 	setActions () {
 		$(this.inputTravessao)
-		.maskMoney({thousands:'.', decimal:','})
-		.prop('placeholder', this.formatNumber(this.limits.travessao.min) + ' até ' + this.formatNumber(this.limits.travessao.max) + 'm');
+		.maskMoney({thousands:'.', decimal:',', allowZero: true})
+		.next()
+		.text(this.formatNumber(this.limits.travessao.min) + ' até ' + this.formatNumber(this.limits.travessao.max) + 'm');
 		
 		$(this.inputAltura)
-		.maskMoney({thousands:'.', decimal:','})
-		.prop('placeholder', this.formatNumber(this.limits.altura.min) + ' até ' + this.formatNumber(this.limits.altura.max) + 'm');
+		.maskMoney({thousands:'.', decimal:',', allowZero: true})
+		.next()
+		.text(this.formatNumber(this.limits.altura.min) + ' até ' + this.formatNumber(this.limits.altura.max) + 'm');
 	
 		$(this.inputRecuoSuperior)
-		.maskMoney({thousands:'.', decimal:','})
-		.prop('placeholder', this.formatNumber(this.limits.recuoSuperior.min) + ' até ' + this.formatNumber(this.limits.recuoSuperior.max) + 'm');
+		.maskMoney({thousands:'.', decimal:',', allowZero: true})
+		.next()
+		.text(this.formatNumber(this.limits.recuoSuperior.min) + ' até ' + this.formatNumber(this.limits.recuoSuperior.max) + 'm');
 
 		$(this.inputRecuoInferior)
-		.maskMoney({thousands:'.', decimal:','})
-		.prop('placeholder', this.formatNumber(this.limits.recuoInferior.min) + ' até ' + this.formatNumber(this.limits.recuoInferior.max) + 'm');
+		.maskMoney({thousands:'.', decimal:',', allowZero: true})
+		.next()
+		.text(this.formatNumber(this.limits.recuoInferior.min) + ' até ' + this.formatNumber(this.limits.recuoInferior.max) + 'm');
 	}
 
 	parseNumber (num) {
