@@ -157,8 +157,8 @@ class checkPageType {
 		var url = new URL(window.location.href);
 		var test = url.searchParams.get("test");
 
-		return test==='calc'
-		//return true
+		//return test==='calc'
+		return true
 	}
 }
 
