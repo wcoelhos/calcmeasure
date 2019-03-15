@@ -10,13 +10,13 @@ class enableCalcPageRede {
 		})//.attr('href', '#')
 
 
-		$('.comprar').hide()
+		$('.comprar').addClass('hide-comprar')
 		this.calc.change(function (areas) {
 			if (areas.length) {
-				$('.comprar').show()
+				$('.comprar').removeClass('hide-comprar')
 				_self.applyQtd(areas)
 			} else {
-				$('.comprar').hide()
+				$('.comprar').addClass('hide-comprar')
 			}
 		})
 	}
@@ -62,12 +62,12 @@ class enableCalcPageGol {
 			_self.recordAreas(e.target)
 		})//.attr('href', '#')
 
-		$('.comprar').hide()
+		$('.comprar').addClass('hide-comprar')
 		this.calc.change(function (areas, filled) {
 			if (filled) {
-				$('.comprar').show()
+				$('.comprar').removeClass('hide-comprar')
 			} else {
-				$('.comprar').hide()
+				$('.comprar').addClass('hide-comprar')
 			}
 		})
 	}
