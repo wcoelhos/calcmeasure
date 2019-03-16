@@ -10,13 +10,13 @@ class enableCalcPageRede {
 		})//.attr('href', '#')
 
 
-		$('.comprar').addClass('hide-comprar')
+		$('.principal .comprar, .principal .cep').addClass('hide-comprar')
 		this.calc.change(function (areas) {
 			if (areas.length) {
-				$('.comprar').removeClass('hide-comprar')
+				$('.principal .comprar, .principal .cep').removeClass('hide-comprar')
 				_self.applyQtd(areas)
 			} else {
-				$('.comprar').addClass('hide-comprar')
+				$('.principal .comprar, .principal .cep').addClass('hide-comprar')
 			}
 		})
 	}
@@ -62,12 +62,12 @@ class enableCalcPageGol {
 			_self.recordAreas(e.target)
 		})//.attr('href', '#')
 
-		$('.comprar').addClass('hide-comprar')
+		$('.principal .comprar').addClass('hide-comprar')
 		this.calc.change(function (areas, filled) {
 			if (filled) {
-				$('.comprar').removeClass('hide-comprar')
+				$('.principal .comprar').removeClass('hide-comprar')
 			} else {
-				$('.comprar').addClass('hide-comprar')
+				$('.principal .comprar').addClass('hide-comprar')
 			}
 		})
 	}
