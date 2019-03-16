@@ -84,6 +84,8 @@ class CalcRede {
 	}
 
 	parseNumber (num) {
+		num = num.replace(/[^0-9.,]/g, "")
+
 		var index = num.lastIndexOf(".") > num.lastIndexOf(",") ? num.lastIndexOf(".") : num.lastIndexOf(",")
 		
 		if (index >= 0) {

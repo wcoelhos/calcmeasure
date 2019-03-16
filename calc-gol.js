@@ -96,6 +96,8 @@ class CalcGol {
 	}
 
 	parseNumber (num) {
+		num = num.replace(/[^0-9.,]/g, "")
+		
 		if (num) {
 			var index = num.lastIndexOf(".") > num.lastIndexOf(",") ? num.lastIndexOf(".") : num.lastIndexOf(",")
 
