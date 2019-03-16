@@ -38,8 +38,8 @@ class CalcRede {
 		this.baseCalcareaElement = $(this.calcareaListElement).find(' > li:hidden').first().clone().css('display', 'block')
 		this.changeFunc = null
 
-		$(this.inputAltura).maskMoney({thousands:'.', decimal:','});
-		$(this.inputComprimento).maskMoney({thousands:'.', decimal:','});
+		//$(this.inputAltura).maskMoney({thousands:'.', decimal:','});
+		//$(this.inputComprimento).maskMoney({thousands:'.', decimal:','});
 
 		$(target).append(this.calcarea)
 		this.start()

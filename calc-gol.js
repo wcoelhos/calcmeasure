@@ -11,23 +11,23 @@ class CalcGol {
 			html += '	<form action="javascript:void(0)" class="calcarea-form">'
 			html += '		<div>'
 			html += '			<label>Travessão</label>'
-			html += '			<input type="text" name="travessao" placeholder="0,00" maxlength="3">'
+			html += '			<input type="text" name="travessao" placeholder="0,00" maxlength="4">'
 			html += '			<small></small>'
 			html += '		</div>'
 			html += '		<div>'
 			html += '			<label>Altura</label>'
-			html += '			<input type="text" name="altura" placeholder="0,00" maxlength="3">'
+			html += '			<input type="text" name="altura" placeholder="0,00" maxlength="4">'
 			html += '			<small></small>'
 			html += '		</div>'
 			html += '		<div class="breakline"></div>'
 			html += '		<div>'
 			html += '			<label>Recuo Superior</label>'
-			html += '			<input type="text" name="recuo-superior" placeholder="0,00" maxlength="3">'
+			html += '			<input type="text" name="recuo-superior" placeholder="0,00" maxlength="4">'
 			html += '			<small></small>'
 			html += '		</div>'
 			html += '		<div>'
 			html += '			<label>Recuo Inferior</label>'
-			html += '			<input type="text" name="recuo-inferior" placeholder="0,00" maxlength="3">'
+			html += '			<input type="text" name="recuo-inferior" placeholder="0,00" maxlength="4">'
 			html += '			<small></small>'
 			html += '		</div>'
 			html += '	</form>'
@@ -75,22 +75,22 @@ class CalcGol {
 
 	setActions () {
 		$(this.inputTravessao)
-		.maskMoney({thousands:'.', decimal:',', allowZero: true})
+		//.maskMoney({thousands:'.', decimal:',', allowZero: true})
 		.next()
 		.text(this.formatNumber(this.limits.travessao.min) + ' até ' + this.formatNumber(this.limits.travessao.max) + 'm');
 		
 		$(this.inputAltura)
-		.maskMoney({thousands:'.', decimal:',', allowZero: true})
+		//.maskMoney({thousands:'.', decimal:',', allowZero: true})
 		.next()
 		.text(this.formatNumber(this.limits.altura.min) + ' até ' + this.formatNumber(this.limits.altura.max) + 'm');
 	
 		$(this.inputRecuoSuperior)
-		.maskMoney({thousands:'.', decimal:',', allowZero: true})
+		//.maskMoney({thousands:'.', decimal:',', allowZero: true})
 		.next()
 		.text(this.formatNumber(this.limits.recuoSuperior.min) + ' até ' + this.formatNumber(this.limits.recuoSuperior.max) + 'm');
 
 		$(this.inputRecuoInferior)
-		.maskMoney({thousands:'.', decimal:',', allowZero: true})
+		//.maskMoney({thousands:'.', decimal:',', allowZero: true})
 		.next()
 		.text(this.formatNumber(this.limits.recuoInferior.min) + ' até ' + this.formatNumber(this.limits.recuoInferior.max) + 'm');
 	}
