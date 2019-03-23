@@ -47,7 +47,7 @@ class CalcGol	 {
 			html += '			<span class="altura">0</span>m Altura x '
 			html += '			<span class="recuo-superior">0</span>m Recuo Superior x '
 			html += '			<span class="recuo-inferior">0</span>m Recuo Inferior - '
-			html += '			<span class="quantidade">0</span> unidade(s)'
+			html += '			<span class="quantidade">0</span> par(es)'
 			html += '		</li>'
 			html += '	</ul>'
 			html += '	<div class="image"><img src="https://cdn.jsdelivr.net/gh/wcoelhos/calcmeasure@0.0.6/img/gol-medidas.jpg"></div>'
@@ -224,7 +224,7 @@ class CalcGol	 {
 
 		return this.areas
 		.map(function (area) {
-			return _self.formatNumber(area.travessao, 2)+"m (travessao) x " + _self.formatNumber(area.altura, 2)+"m (altura) x " + _self.formatNumber(area.recuoSuperior, 2)+"m (recuo superior) x " + _self.formatNumber(area.recuoInferior, 2)+"m (recuo inferior) - "+_self.formatNumber(area.quantidade, 0)+" unidade(s)"
+			return _self.formatNumber(area.travessao, 2)+"m (travessao) x " + _self.formatNumber(area.altura, 2)+"m (altura) x " + _self.formatNumber(area.recuoSuperior, 2)+"m (recuo superior) x " + _self.formatNumber(area.recuoInferior, 2)+"m (recuo inferior) - "+_self.formatNumber(area.quantidade, 0)+" par(es)"
 		}).join("\r\n")
 	}
 
