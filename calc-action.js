@@ -58,7 +58,7 @@ class enableCalcPageGol {
 		})//.attr('href', '#')
 
 		//troca para metro quadrado
-		$(this.qtdeTitle).text('par')
+		$(this.qtdeTitle).text('Par')
 		//esconde cep
 		$(this.boxCep).addClass('hide-comprar')
 		//desabilita botao
