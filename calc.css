@@ -107,3 +107,6 @@
 	opacity: 0;
 	position: absolute;
 }
+.readonly-input {
+	cursor: default;
+}

@@ -1,23 +1,28 @@
 class enableCalcPageRede {
  
 	constructor() {
-
-		this.calc = new CalcRede('.info-principal-produto')	
-
 		var _self = this
-		$('.botao.botao-comprar.principal.grande:not(.desativo)').click(function(e) {
+
+		this.calc = new CalcRede('.info-principal-produto')
+		this.qtdInput = $('.principal .comprar .qtde-adicionar-carrinho input[name=qtde-carrinho]')
+		this.btComprar = $('.botao.botao-comprar.principal.grande:not(.desativo)')
+		this.boxCep = $('.principal .comprar, .principal .cep')
+		this.qtdeTitle = $('.qtde-adicionar-carrinho .qtde-carrinho-title')
+
+		$(this.btComprar).click(function(e) {
 			_self.recordAreas(e.target)
 		})//.attr('href', '#')
 
-
-		$('.principal .comprar, .principal .cep').addClass('hide-comprar')
-		this.calc.change(function (areas) {
-			if (areas.length) {
-				$('.principal .comprar, .principal .cep').removeClass('hide-comprar')
-				_self.applyQtd(areas)
-			} else {
-				$('.principal .comprar, .principal .cep').addClass('hide-comprar')
-			}
+		//troca para metro quadrado
+		$(this.qtdeTitle).text('m²')
+		//esconde cep
+		$(this.boxCep).addClass('hide-comprar')
+		//desabilita botao
+		$(this.qtdInput).prop('readonly', 'readonly').addClass('readonly-input')
+		
+		this.calc.change(function (areas, amount) {
+			_self.applyQtd(amount)
+			$(_self.boxCep).toggleClass('hide-comprar', !amount)
 		})
 	}
 
@@ -31,23 +36,9 @@ class enableCalcPageRede {
 		}
 	}
 
-	applyQtd (areas) {
-		var qtdInput = $('.principal .comprar .qtde-adicionar-carrinho input[name=qtde-carrinho]')
-
-		if (areas.length) {
-			 var sum = areas
-			.map(function (val) {
-				return val.area
-			})
-			.reduce(function (accumulator, currentValue) {
-				return accumulator + currentValue
-			})
-		} else {
-			var sum = 0
-		}
-
-		qtdInput.val(sum)
-		qtdInput.change()
+	applyQtd (amount) {
+		$(this.qtdInput).val(amount)
+		$(this.qtdInput).change()
 	}
 }
 
@@ -64,11 +55,7 @@ class enableCalcPageGol {
 
 		$('.principal .comprar').addClass('hide-comprar')
 		this.calc.change(function (areas, filled) {
-			if (filled) {
-				$('.principal .comprar').removeClass('hide-comprar')
-			} else {
-				$('.principal .comprar').addClass('hide-comprar')
-			}
+			$('.principal .comprar').toggleClass('hide-comprar', !filled)
 		})
 	}
 
