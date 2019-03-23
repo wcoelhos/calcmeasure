@@ -1,11 +1,11 @@
-class CalcGol {
+class CalcGol	 {
 
 	constructor(target, type) {
-		this.medidas = null
+		this.areas = []
 
 		var html = ''
 			html += '<div class="calcarea">'
-			html += '	<div class="calcarea-header danger">'
+			html += '	<div class="calcarea-header">'
 			html += '		Informe abaixo as medidas (em metros) da rede'
 			html += '	</div>'
 			html += '	<form action="javascript:void(0)" class="calcarea-form">'
@@ -30,7 +30,26 @@ class CalcGol {
 			html += '			<input type="text" name="recuo-inferior" placeholder="0,00" maxlength="4">'
 			html += '			<small></small>'
 			html += '		</div>'
+			html += '		<div class="breakline"></div>'
+			html += '		<div>'
+			html += '			<label>Qtd</label>'
+			html += '			<input type="text" name="quantidade" value="1" placeholder="0">'
+			html += '		</div>'
+			html += '		<div>'
+			html += '			<label>--</label>'
+			html += '			<button type="submit">Adicionar</button>'
+			html += '		</div>'
 			html += '	</form>'
+			html += '	<ul class="calcarea-list list">'
+			html += '		<li style="display: none;">'
+			html += '			<a href="javascript:void(0)" class="remove">x</a>'
+			html += '			<span class="travessao">0</span>m Travessão x '
+			html += '			<span class="altura">0</span>m Altura x '
+			html += '			<span class="recuo-superior">0</span>m Recuo Superior x '
+			html += '			<span class="recuo-inferior">0</span>m Recuo Inferior - '
+			html += '			<span class="quantidade">0</span> unidade(s)'
+			html += '		</li>'
+			html += '	</ul>'
 			html += '	<div class="image"><img src="https://cdn.jsdelivr.net/gh/wcoelhos/calcmeasure@0.0.6/img/gol-medidas.jpg"></div>'
 			html += '</div>'
 
@@ -40,7 +59,9 @@ class CalcGol {
 		this.inputAltura = $(this.calcareaForm).find('input[name="altura"]')
 		this.inputRecuoSuperior = $(this.calcareaForm).find('input[name="recuo-superior"]')
 		this.inputRecuoInferior = $(this.calcareaForm).find('input[name="recuo-inferior"]')
-		this.divHeader = $(this.calcarea).find('.calcarea-header') 
+		this.inputQuantidade = $(this.calcareaForm).find('input[name="quantidade"]')
+		this.calcareaListElement = $(this.calcarea).find('.calcarea-list')
+		this.baseCalcareaElement = $(this.calcareaListElement).find(' > li:hidden').first().clone().css('display', 'block')
 		this.changeFunc = null
 
 		if (type === 'futsal') {
@@ -68,100 +89,157 @@ class CalcGol {
 			}
 		}
 
-		this.setActions()
+		//$(this.inputTravessao).maskMoney({thousands:'.', decimal:','});
+		//$(this.inputAltura).maskMoney({thousands:'.', decimal:','});
+		//$(this.inputRecuoInferior).maskMoney({thousands:'.', decimal:','});
+		//$(this.inputRecuoInferior).maskMoney({thousands:'.', decimal:','});
+
+		this.setLabel()
 		$(target).append(this.calcarea)
 		this.start()
 	}
 
-	setActions () {
+	setLabel () {
 		$(this.inputTravessao)
-		//.maskMoney({thousands:'.', decimal:',', allowZero: true})
 		.next()
 		.text(this.formatNumber(this.limits.travessao.min) + ' até ' + this.formatNumber(this.limits.travessao.max) + 'm');
 		
 		$(this.inputAltura)
-		//.maskMoney({thousands:'.', decimal:',', allowZero: true})
 		.next()
 		.text(this.formatNumber(this.limits.altura.min) + ' até ' + this.formatNumber(this.limits.altura.max) + 'm');
 	
 		$(this.inputRecuoSuperior)
-		//.maskMoney({thousands:'.', decimal:',', allowZero: true})
 		.next()
 		.text(this.formatNumber(this.limits.recuoSuperior.min) + ' até ' + this.formatNumber(this.limits.recuoSuperior.max) + 'm');
 
 		$(this.inputRecuoInferior)
-		//.maskMoney({thousands:'.', decimal:',', allowZero: true})
 		.next()
 		.text(this.formatNumber(this.limits.recuoInferior.min) + ' até ' + this.formatNumber(this.limits.recuoInferior.max) + 'm');
 	}
 
+	addCalcareaItem (area, index) {
+		var _self = this
+
+		var item = $(this.baseCalcareaElement).clone()
+			item.find('.travessao').text(this.formatNumber(area.travessao, 2))
+			item.find('.altura').text(this.formatNumber(area.altura, 2))
+			item.find('.recuo-superior').text(this.formatNumber(area.recuoSuperior, 2))
+			item.find('.recuo-inferior').text(this.formatNumber(area.recuoInferior, 2))
+			item.find('.quantidade').text(this.formatNumber(area.quantidade, 0))
+			item.find('.area').text(this.formatNumber(area.area, 2) + 'm²')
+			item.find('.remove').click(function () {
+				_self.removeArea(index)
+			})
+		
+		$(this.calcareaListElement).prepend(item)
+	}
+
+	renderAreas () {
+		var _self = this
+		
+		$(this.calcareaListElement).find('> li').remove()
+
+		this.areas.forEach(function (area, index) {
+			_self.addCalcareaItem(area, index)
+		})
+
+		if (this.changeFunc) {
+			this.changeFunc(this.areas, this.getAmount())
+		}
+	}
+
+	addArea (area) {
+		this.areas.push(area)
+		this.renderAreas()
+	}
+
+	removeArea (index) {
+		this.areas.splice(index, 1)
+		this.renderAreas()
+	}
+
 	parseNumber (num) {
 		num = num.replace(/[^0-9.,]/g, "")
-		
-		if (num) {
-			var index = num.lastIndexOf(".") > num.lastIndexOf(",") ? num.lastIndexOf(".") : num.lastIndexOf(",")
 
-			if (index >= 0) {
-				var number = num.substring(0, index)
-				var decimal = num.substring(index+1)
-				num = number.replace('.', '').replace(',', '') + '.' + decimal.replace('.', '').replace(',', '')
-			}
+		var index = num.lastIndexOf(".") > num.lastIndexOf(",") ? num.lastIndexOf(".") : num.lastIndexOf(",")
+		
+		if (index >= 0) {
+			var number = num.substring(0, index)
+			var decimal = num.substring(index+1)
+			num = number.replace('.', '').replace(',', '') + '.' + decimal.replace('.', '').replace(',', '')
 		}
 
 		return $.isNumeric(num) ? parseFloat(num) : null
 	}
 
-	formatNumber (num) {
-		num = parseFloat(parseFloat(num).toFixed(2))
+	formatNumber (num, decimals=2) {
+		num = parseFloat(parseFloat(num).toFixed(decimals))
 		return num.toLocaleString(
 		  'pt-BR',
-		  { minimumFractionDigits: 2 }
+		  { minimumFractionDigits: decimals }
 		)
-	}
-
-	getValues () {
-		return {
-			travessao: this.parseNumber(this.inputTravessao.val()),
-			altura: this.parseNumber(this.inputAltura.val()),
-			recuoSuperior: this.parseNumber(this.inputRecuoSuperior.val()),
-			recuoInferior: this.parseNumber(this.inputRecuoInferior.val())
-		}
-	}
-
-	isFilled () {
-		return this.isValid(this.getValues().travessao, 'travessao')
-		&& this.isValid(this.getValues().altura, 'altura')
-		&& this.isValid(this.getValues().recuoSuperior, 'recuoSuperior')
-		&& this.isValid(this.getValues().recuoInferior, 'recuoInferior')
-	}
-
-	submit (form) {
-		if (this.isFilled()) {
-			$(this.divHeader).removeClass('danger').text('Medidas informadas corretamente!')
-		} else {
-			$(this.divHeader).addClass('danger').text('Informe abaixo as medidas (em metros) da rede')
-		}
-
-		if (this.changeFunc) {
-			this.changeFunc(this.getValues(), this.isFilled())
-		}
-	}
-
-	getTextAreas () {
-		if (this.isFilled()) {
-			return [
-				this.formatNumber(this.getValues().travessao)+"m (travessao)",
-				this.formatNumber(this.getValues().altura)+"m (altura)",
-				this.formatNumber(this.getValues().recuoSuperior)+"m (recuo superior)",
-				this.formatNumber(this.getValues().recuoInferior)+"m (recuo inferior)"
-			].join(' x ')
-		} else {
-			return "Medidas não informada"
-		}
 	}
 
 	isValid (value, medida) {
 		return value >= this.limits[medida].min && value <= this.limits[medida].max
+	}
+
+	submit (form) {
+		var valTravessao = this.parseNumber(this.inputTravessao.val())
+		var valAltura = this.parseNumber(this.inputAltura.val())
+		var valRecuoSuperior = this.parseNumber(this.inputRecuoSuperior.val())
+		var valRecuoInferior = this.parseNumber(this.inputRecuoInferior.val())
+		var valQuantidade = this.parseNumber(this.inputQuantidade.val())
+
+		this.inputTravessao.toggleClass('input-error', !(valTravessao && this.isValid(valTravessao, 'travessao')))
+		this.inputAltura.toggleClass('input-error', !(valAltura && this.isValid(valAltura, 'altura')))
+		this.inputRecuoSuperior.toggleClass('input-error', !(valRecuoSuperior && this.isValid(valRecuoSuperior, 'recuoSuperior')))
+		this.inputRecuoInferior.toggleClass('input-error', !(valRecuoInferior && this.isValid(valRecuoInferior, 'recuoInferior')))
+		this.inputQuantidade.toggleClass('input-error', !valQuantidade)
+
+		if (
+			!this.inputTravessao.is('.input-error') &&
+			!this.inputAltura.is('.input-error') &&
+			!this.inputRecuoSuperior.is('.input-error') &&
+			!this.inputRecuoInferior.is('.input-error') &&
+			!this.inputQuantidade.is('.input-error')
+		) {
+			this.addArea({
+				travessao: valTravessao,
+				altura: valAltura,
+				recuoSuperior: valRecuoSuperior,
+				recuoInferior: valRecuoInferior,
+				quantidade: Math.round(valQuantidade)
+			})
+			this.inputTravessao.val('')
+			this.inputAltura.val('')
+			this.inputRecuoSuperior.val('')
+			this.inputRecuoInferior.val('')
+			this.inputQuantidade.val(1)
+		}
+	}
+
+	getTextAreas () {
+		var _self = this
+
+		return this.areas
+		.map(function (area) {
+			return _self.formatNumber(area.travessao, 2)+"m (travessao) x " + _self.formatNumber(area.altura, 2)+"m (altura) x " + _self.formatNumber(area.recuoSuperior, 2)+"m (recuo superior) x " + _self.formatNumber(area.recuoInferior, 2)+"m (recuo inferior) - "+_self.formatNumber(area.quantidade, 0)+" unidade(s)"
+		}).join("\r\n")
+	}
+
+	getAmount () {
+		if (this.areas.length) {
+			return this.areas
+			.map(function (val) {
+				return val.quantidade
+			})
+			.reduce(function (accumulator, currentValue) {
+				return accumulator + currentValue
+			})
+		} else {
+			return 0
+		}
 	}
 
 	change (func) {
@@ -170,52 +248,25 @@ class CalcGol {
 
 	start (target) {
 		var _self = this
-		$(_self.inputTravessao)
-		.keyup(function (el) {
-			$(el.target).removeClass('input-error')
+		$(this.calcareaForm).submit(function (el) {
 			_self.submit()
 		})
-		.blur(function (el) {
-			var value = _self.parseNumber(el.target.value)
-			if (value && !_self.isValid(value, 'travessao')) {
-				$(el.target).addClass('input-error')
-			}
-		})
-
-		$(_self.inputAltura)
-		.keyup(function (el) {
+		
+		$(_self.inputTravessao).keypress(function (el) {
 			$(el.target).removeClass('input-error')
-			_self.submit()
 		})
-		.blur(function (el) {
-			var value = _self.parseNumber(el.target.value)
-			if (value && !_self.isValid(value, 'altura')) {
-				$(el.target).addClass('input-error')
-			}
-		})
-
-		$(_self.inputRecuoSuperior)
-		.keyup(function (el) {
+		$(_self.inputAltura).keypress(function (el) {
 			$(el.target).removeClass('input-error')
-			_self.submit()
 		})
-		.blur(function (el) {
-			var value = _self.parseNumber(el.target.value)
-			if (value && !_self.isValid(value, 'recuoSuperior')) {
-				$(el.target).addClass('input-error')
-			}
-		})
-
-		$(_self.inputRecuoInferior)
-		.keyup(function (el) {
+		$(_self.inputRecuoSuperior).keypress(function (el) {
 			$(el.target).removeClass('input-error')
-			_self.submit()
 		})
-		.blur(function (el) {
-			var value = _self.parseNumber(el.target.value)
-			if (value && !_self.isValid(value, 'recuoInferior')) {
-				$(el.target).addClass('input-error')
-			}
+		$(_self.inputRecuoInferior).keypress(function (el) {
+			$(el.target).removeClass('input-error')
 		})
+		$(_self.inputQuantidade).keypress(function (el) {
+			$(el.target).removeClass('input-error')
+		})
+		this.renderAreas()
 	}
 }

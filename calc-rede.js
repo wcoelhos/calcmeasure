@@ -116,20 +116,24 @@ class CalcRede {
 		var valComprimento = this.parseNumber(this.inputComprimento.val())
 		var valQuantidade = this.parseNumber(this.inputQuantidade.val())
 
-		if (valAltura && valComprimento && valQuantidade) {
+		this.inputAltura.toggleClass('input-error', !valAltura)
+		this.inputComprimento.toggleClass('input-error', !valComprimento)
+		this.inputQuantidade.toggleClass('input-error', !valQuantidade)
+
+		if (
+			!this.inputAltura.is('.input-error') &&
+			!this.inputComprimento.is('.input-error') &&
+			!this.inputQuantidade.is('.input-error')
+		) {
 			this.addArea({
 				altura: valAltura,
 				comprimento: valComprimento,
 				area: Math.round(valAltura * valComprimento),
 				quantidade: Math.round(valQuantidade)
 			})
-			this.inputAltura.removeClass('input-error').val('')
-			this.inputComprimento.removeClass('input-error').val('')
-			this.inputQuantidade.removeClass('input-error').val(1)
-		} else {
-			if (!valAltura) this.inputAltura.addClass('input-error')
-			if (!valComprimento) this.inputComprimento.addClass('input-error')
-			if (!valQuantidade) this.inputQuantidade.addClass('input-error')
+			this.inputAltura.val('')
+			this.inputComprimento.val('')
+			this.inputQuantidade.val(1)
 		}
 	}
 

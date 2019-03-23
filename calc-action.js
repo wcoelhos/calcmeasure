@@ -45,17 +45,28 @@ class enableCalcPageRede {
 class enableCalcPageGol {
  
 	constructor(type) {
+		var _self = this
 
 		this.calc = new CalcGol('.info-principal-produto', type)
-		
-		var _self = this
-		$('.botao.botao-comprar.principal.grande:not(.desativo)').click(function(e) {
-			_self.recordAreas(e.target)
-		})//.attr('href', '#')
+		this.qtdInput = $('.principal .comprar .qtde-adicionar-carrinho input[name=qtde-carrinho]')
+		this.btComprar = $('.botao.botao-comprar.principal.grande:not(.desativo)')
+		this.boxCep = $('.principal .comprar, .principal .cep')
+		this.qtdeTitle = $('.qtde-adicionar-carrinho .qtde-carrinho-title')
 
-		$('.principal .comprar').addClass('hide-comprar')
-		this.calc.change(function (areas, filled) {
-			$('.principal .comprar').toggleClass('hide-comprar', !filled)
+		$(this.btComprar).click(function(e) {
+			_self.recordAreas(e.target)
+		}).attr('href', '#')
+
+		//troca para metro quadrado
+		$(this.qtdeTitle).text('m²')
+		//esconde cep
+		$(this.boxCep).addClass('hide-comprar')
+		//desabilita botao
+		$(this.qtdInput).prop('readonly', 'readonly').addClass('readonly-input')
+		
+		this.calc.change(function (areas, amount) {
+			_self.applyQtd(amount)
+			$(_self.boxCep).toggleClass('hide-comprar', !amount)
 		})
 	}
 
@@ -67,6 +78,11 @@ class enableCalcPageGol {
 			localStorage.setItem(sku, areas)
 			console.log(sku, ":", areas)
 		}
+	}
+
+	applyQtd (amount) {
+		$(this.qtdInput).val(amount)
+		$(this.qtdInput).change()
 	}
 }
 
