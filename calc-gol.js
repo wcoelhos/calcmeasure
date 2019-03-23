@@ -191,10 +191,10 @@ class CalcGol	 {
 		var valRecuoInferior = this.parseNumber(this.inputRecuoInferior.val())
 		var valQuantidade = this.parseNumber(this.inputQuantidade.val())
 
-		this.inputTravessao.toggleClass('input-error', !(valTravessao && this.isValid(valTravessao, 'travessao')))
-		this.inputAltura.toggleClass('input-error', !(valAltura && this.isValid(valAltura, 'altura')))
-		this.inputRecuoSuperior.toggleClass('input-error', !(valRecuoSuperior && this.isValid(valRecuoSuperior, 'recuoSuperior')))
-		this.inputRecuoInferior.toggleClass('input-error', !(valRecuoInferior && this.isValid(valRecuoInferior, 'recuoInferior')))
+		this.inputTravessao.toggleClass('input-error', !this.isValid(valTravessao, 'travessao'))
+		this.inputAltura.toggleClass('input-error', !this.isValid(valAltura, 'altura'))
+		this.inputRecuoSuperior.toggleClass('input-error', !this.isValid(valRecuoSuperior, 'recuoSuperior'))
+		this.inputRecuoInferior.toggleClass('input-error', !this.isValid(valRecuoInferior, 'recuoInferior'))
 		this.inputQuantidade.toggleClass('input-error', !valQuantidade)
 
 		if (
@@ -205,10 +205,10 @@ class CalcGol	 {
 			!this.inputQuantidade.is('.input-error')
 		) {
 			this.addArea({
-				travessao: valTravessao,
-				altura: valAltura,
-				recuoSuperior: valRecuoSuperior,
-				recuoInferior: valRecuoInferior,
+				travessao: valTravessao || 0,
+				altura: valAltura || 0,
+				recuoSuperior: valRecuoSuperior || 0,
+				recuoInferior: valRecuoInferior || 0,
 				quantidade: Math.round(valQuantidade)
 			})
 			this.inputTravessao.val('')
