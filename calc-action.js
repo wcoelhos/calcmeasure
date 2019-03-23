@@ -55,7 +55,7 @@ class enableCalcPageGol {
 
 		$(this.btComprar).click(function(e) {
 			_self.recordAreas(e.target)
-		}).attr('href', '#')
+		})//.attr('href', '#')
 
 		//troca para metro quadrado
 		$(this.qtdeTitle).text('m²')
