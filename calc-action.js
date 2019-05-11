@@ -3,7 +3,7 @@ class enableCalcPageRede {
 	constructor() {
 		var _self = this
 
-		this.calc = new CalcRede('.info-principal-produto')
+		this.calc = new CalcRede({'.atributos': 'prepend', '.info-principal-produto': 'insertAfter'})
 		this.qtdInput = $('.principal .comprar .qtde-adicionar-carrinho input[name=qtde-carrinho]')
 		this.btComprar = $('.botao.botao-comprar.principal.grande:not(.desativo)')
 		this.boxCep = $('.principal .comprar, .principal .cep')
@@ -28,6 +28,7 @@ class enableCalcPageRede {
 
 	recordAreas (target) {
 		var sku = $(target).parents('.acoes-produto').find('meta[itemprop=sku]').prop('content')
+		if (!sku) sku = $(target).parents('.principal').find('span[itemprop=sku]').text()
 
 		if (sku) {
 			var areas = this.calc.getTextAreas()
@@ -47,7 +48,7 @@ class enableCalcPageGol {
 	constructor(type) {
 		var _self = this
 
-		this.calc = new CalcGol('.info-principal-produto', type)
+		this.calc = new CalcGol({'.atributos': 'prepend', '.info-principal-produto': 'insertAfter'}, type)
 		this.qtdInput = $('.principal .comprar .qtde-adicionar-carrinho input[name=qtde-carrinho]')
 		this.btComprar = $('.botao.botao-comprar.principal.grande:not(.desativo)')
 		this.boxCep = $('.principal .comprar, .principal .cep')
@@ -72,6 +73,7 @@ class enableCalcPageGol {
 
 	recordAreas (target) {
 		var sku = $(target).parents('.acoes-produto').find('meta[itemprop=sku]').prop('content')
+		if (!sku) sku = $(target).parents('.principal').find('span[itemprop=sku]').text()
 
 		if (sku) {
 			var areas = this.calc.getTextAreas()

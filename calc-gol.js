@@ -32,7 +32,7 @@ class CalcGol	 {
 			html += '		</div>'
 			html += '		<div class="breakline"></div>'
 			html += '		<div>'
-			html += '			<label>Qtd</label>'
+			html += '			<label>Quantidade</label>'
 			html += '			<input type="text" name="quantidade" value="1" placeholder="0">'
 			html += '		</div>'
 			html += '		<div>'
@@ -95,7 +95,17 @@ class CalcGol	 {
 		//$(this.inputRecuoInferior).maskMoney({thousands:'.', decimal:','});
 
 		this.setLabel()
-		$(target).append(this.calcarea)
+
+		for (var selector in target) {
+		  const position = target[selector]
+		  if ($(selector).length) {
+		  	if (position === 'insertAfter') $(this.calcarea).insertAfter($(selector))
+			else if (position === 'prepend') $(selector).prepend(this.calcarea)
+			else $(selector).append(this.calcarea)
+			break;
+		  }
+		}
+
 		this.start()
 	}
 
