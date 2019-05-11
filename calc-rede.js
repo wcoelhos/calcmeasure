@@ -1,9 +1,10 @@
+
 class CalcRede {
 
 	constructor(target) {
 		this.areas = []
 
-		var html = ''
+		var html = '<div>'
 			html += '<div class="calcarea">'
 			html += '	<div class="calcarea-header">'
 			html += '		Calcule abaixo quantos m² você precisa:'
@@ -33,6 +34,7 @@ class CalcRede {
 			html += '			<span class="altura">0</span>m x <span class="comprimento">0</span>m <strong>(<span class="area">0m²</span>)</strong> - <span class="quantidade">0</span> unidades'
 			html += '		</li>'
 			html += '	</ul>'
+			html += '</div>'
 			html += '</div>'
 
 		this.calcarea = $(html)

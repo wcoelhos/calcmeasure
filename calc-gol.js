@@ -3,7 +3,7 @@ class CalcGol	 {
 	constructor(target, type) {
 		this.areas = []
 
-		var html = ''
+		var html = '<div>'
 			html += '<div class="calcarea">'
 			html += '	<div class="calcarea-header">'
 			html += '		Informe abaixo as medidas (em metros) da rede'
@@ -51,6 +51,7 @@ class CalcGol	 {
 			html += '		</li>'
 			html += '	</ul>'
 			html += '	<div class="image"><img src="https://cdn.jsdelivr.net/gh/wcoelhos/calcmeasure@0.0.6/img/gol-medidas.jpg"></div>'
+			html += '</div>'
 			html += '</div>'
 
 		this.calcarea = $(html)
