@@ -3,7 +3,7 @@ class enableCalcPageRede {
 	constructor() {
 		var _self = this
 
-		this.calc = new CalcRede({'.atributos': 'prepend', '.info-principal-produto': 'insertAfter'})
+		this.calc = new CalcRede({'.atributos': 'insertAfter', '.info-principal-produto': 'insertAfter'})
 		this.qtdInput = $('.principal .comprar .qtde-adicionar-carrinho input[name=qtde-carrinho]')
 		this.btComprar = $('.botao.botao-comprar.principal.grande:not(.desativo)')
 		this.boxCep = $('.principal .comprar, .principal .cep')
@@ -48,7 +48,7 @@ class enableCalcPageGol {
 	constructor(type) {
 		var _self = this
 
-		this.calc = new CalcGol({'.atributos': 'prepend', '.info-principal-produto': 'insertAfter'}, type)
+		this.calc = new CalcGol({'.atributos': 'insertAfter', '.info-principal-produto': 'insertAfter'}, type)
 		this.qtdInput = $('.principal .comprar .qtde-adicionar-carrinho input[name=qtde-carrinho]')
 		this.btComprar = $('.botao.botao-comprar.principal.grande:not(.desativo)')
 		this.boxCep = $('.principal .comprar, .principal .cep')
