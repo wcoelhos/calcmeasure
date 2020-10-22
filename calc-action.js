@@ -166,9 +166,11 @@ class enableCartPage {
 		$('.tabela-carrinho > tbody > tr').each(function (index, el) {
 			var sku = $(el).find('.produto-info > ul > li').first().find('strong').text().trim()
 			var input = $(el).find('.quantidade > input[name=quantidade]')
-			var options = $(el).find('.quantidade > a.icon-minus, .quantidade > button.atualizar-quantidade')
+			var form = $(el).find('form')
+			var options = $(el).find('.quantidade > a.icon-minus, .quantidade > a.icon-plus, .quantidade > button.atualizar-quantidade')
 			if (_self.ckeckStoredBySku(sku)) {
 				input.attr('disabled', true)
+				form.attr('disabled', true)
 				$(options).remove()
 			}
 		})
