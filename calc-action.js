@@ -88,7 +88,7 @@ class enableCalcPageGol {
 	}
 }
 
-class enableCheckcoutPage {
+class enableCheckoutPage {
 
 	constructor() {
 		var value = this.getTextAreas()
@@ -151,6 +151,31 @@ class enableCheckcoutPage {
 
 }
 
+class enableCartPage {
+
+	constructor() {
+		this.disableQtd()
+	}
+
+	ckeckStoredBySku (sku) {
+		return localStorage.getItem(sku)
+	}
+
+	disableQtd () {
+		var _self = this
+		$('.tabela-carrinho > tbody > tr').each(function (index, el) {
+			var sku = $(el).find('.produto-info > ul > li').first().find('strong').text().trim()
+			var input = $(el).find('.quantidade > input[name=quantidade]')
+			var options = $(el).find('.quantidade > a.icon-minus, .quantidade > button.atualizar-quantidade')
+			if (_self.ckeckStoredBySku(sku)) {
+				input.attr('disabled', true)
+				$(options).remove()
+			}
+		})
+	}
+
+}
+
 class checkPageType {
 
 	constructor() {
@@ -176,8 +201,12 @@ class checkPageType {
 		return $(descricao).length && this.sandbox()
 	}
 
-	isCheckcout () {
+	isCheckout () {
 		return $('textarea[name=cliente_obs]').length && this.sandbox()
+	}
+
+	isCart () {
+		return $('table.tabela-carrinho').length && this.sandbox()
 	}
 
 	sandbox () {
@@ -214,9 +243,14 @@ $(document).ready(function () {
 		new enableCalcPageGol('campo')
 	}
 	
-	if (pageType.isCheckcout()) {
-		console.log('isCheckcout')
-		new enableCheckcoutPage()
+	if (pageType.isCheckout()) {
+		console.log('isCheckout')
+		new enableCheckoutPage()
+	}
+
+	if (pageType.isCart()) {
+		console.log('isCart')
+		new enableCartPage()
 	}
 
 	if (pageType.sandbox()) {

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />	
+	<title></title>
+	<script
+	  src="https://code.jquery.com/jquery-3.3.1.min.js"
+	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	  crossorigin="anonymous"></script>
+	<script
+	  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+	  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+	  crossorigin="anonymous"></script>
+
+   <script type="text/javascript" src="calc-rede.js"></script>
+   <script type="text/javascript" src="calc-gol.js"></script>
+   <script type="text/javascript" src="calc-action.js"></script>
+	 <link rel="stylesheet" type="text/css" href="calc.css">
+</head>
+<body>
+
+  <div class="conteiner-principal">
+     <div id="cabecalho">
+        <div class="atalhos-mobile visible-phone fundo-secundario borda-principal">
+           <ul>
+              <li><a href="https://www.gismar.com.br/" class="icon-home"> </a></li>
+              <li class="fundo-principal"><a href="https://www.gismar.com.br/carrinho/index" class="icon-shopping-cart"> </a></li>
+              <li><a href="https://www.gismar.com.br/conta/index" class="icon-user"> </a></li>
+              <li class="vazia"><span>&nbsp;</span></li>
+           </ul>
+        </div>
+        <div class="conteiner">
+           <div class="row-fluid">
+              <div class="span3">
+                 <h2 class="logo cor-secundaria">
+                    <a href="https://www.gismar.com.br/" title="GISMAR REDES">
+                    <img src="https://cdn.awsli.com.br/400x300/99/99834/logo/3337043003.jpg" alt="GISMAR REDES" />
+                    </a>
+                 </h2>
+              </div>
+              <div class="conteudo-topo span9">
+                 <div class="superior row-fluid hidden-phone">
+                    <div class="span8">
+                       <a href="https://www.gismar.com.br/conta/login" class="bem-vindo cor-secundaria">
+                       Bem-vindo, <span class="cor-principal">identifique-se</span> para fazer pedidos
+                       </a>
+                    </div>
+                    <div class="span4">
+                       <ul class="acoes-conta borda-alpha">
+                          <li>
+                             <i class="icon-list fundo-principal"></i>
+                             <a href="https://www.gismar.com.br/conta/pedido/listar" class="cor-secundaria">Meus Pedidos</a>
+                          </li>
+                          <li>
+                             <i class="icon-user fundo-principal"></i>
+                             <a href="https://www.gismar.com.br/conta/index" class="cor-secundaria">Minha Conta</a>
+                          </li>
+                       </ul>
+                    </div>
+                 </div>
+                 <div class="inferior row-fluid sem-menu">
+                    <div class="span8 busca-mobile">
+                       <a href="javascript:;" class="atalho-menu visible-phone icon-th botao principal"> </a>
+                       <div class="busca borda-alpha">
+                          <form id="form-buscar" action="/buscar" method="get">
+                             <input id="auto-complete" type="text" name="q" placeholder="Digite o que você procura" value="" autocomplete="off" />
+                             <button class="botao botao-busca icon-search fundo-secundario"></button>
+                          </form>
+                       </div>
+                    </div>
+                    <div class="span4 hidden-phone">
+                       <div class="carrinho ">
+                          <a href="https://www.gismar.com.br/carrinho/index">
+                          <i class="icon-shopping-cart fundo-principal"></i>
+                          <strong class="qtd-carrinho titulo cor-secundaria">2</strong>
+                          <span>
+                          <b class="titulo cor-secundaria"><span>Meu Carrinho</span></b>
+                          <span class="cor-secundaria">Produtos adicionados</span>
+                          </span>
+                          <span class="titulo cor-secundaria vazio-text">Carrinho vazio</span>
+                          </a>
+                          <div class="carrinho-interno-ajax">
+                             <div class="carrinho-interno borda-principal">
+                                <ul>
+                                   <li>
+                                      <div class="preco-produto destaque-parcela ">
+                                         <div>
+                                            <strong class="preco-promocional cor-principal ">
+                                            R$ 139,00
+                                            </strong>
+                                         </div>
+                                      </div>
+                                      <a href="https://www.gismar.com.br/par-rede-gol-futsal-fio-4mm-nylon-futebol-de-salao" class="imagem-produto">
+                                      <img src="https://cdn.awsli.com.br/64x64/99/99834/produto/4026744/b72313008a.jpg" alt="Par de Rede para Trave de Gol Futsal Fio 4mm Nylon Futebol de Salão" />
+                                      </a>
+                                      <a href="https://www.gismar.com.br/par-rede-gol-futsal-fio-4mm-nylon-futebol-de-salao" class="nome-produto cor-secundaria">
+                                      Par de Rede para Trave de Gol Futsal Fio 4mm Nylon Futebol de Salão
+                                      </a>
+                                      <div class="produto-sku hide">PG011</div>
+                                   </li>
+                                   <li>
+                                      <div class="preco-produto destaque-parcela ">
+                                         <div>
+                                            <strong class="preco-promocional cor-principal ">
+                                            R$ 12,59
+                                            </strong>
+                                         </div>
+                                      </div>
+                                      <a href="https://www.gismar.com.br/rede-de-protecao-esportiva-sob-medida-fio-4-malha-8cm" class="imagem-produto">
+                                      <img src="https://cdn.awsli.com.br/64x64/99/99834/produto/4392499/a51ac9fa61.jpg" alt="Rede de Proteção Esportiva Sob Medida Para Campo/Quadra de Futsal, Futebol, Society Fio 4 Malha 8cm Nylon" />
+                                      </a>
+                                      <a href="https://www.gismar.com.br/rede-de-protecao-esportiva-sob-medida-fio-4-malha-8cm" class="nome-produto cor-secundaria">
+                                      Rede de Proteção Esportiva Sob Medida Para Campo/Quadra de Futsal, Futebol, Society Fio 4 Malha 8cm Nylon
+                                      </a>
+                                      <div class="produto-sku hide">M005Azul</div>
+                                   </li>
+                                </ul>
+                                <div class="carrinho-rodape">
+                                   <span class="carrinho-info">
+                                   <i>2 produtos no carrinho</i>
+                                   <span class="carrino-total">
+                                   Total: <strong class="titulo cor-principal">R$ 5.175,00</strong>
+                                   </span>
+                                   </span>
+                                   <a href="https://www.gismar.com.br/carrinho/index" class="botao principal">
+                                   <i class="icon-shopping-cart"></i>Ir para o carrinho
+                                   </a>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+        <span id="delimitadorBarra"></span>
+     </div>
+     <div id="corpo">
+        <div class="conteiner">
+           <div class="secao-principal row-fluid ">
+              <div class="finalizar-compra">
+                 <div class="cabecalho-interno row-fluid">
+                    <div class="span12">
+                       <h1 class="titulo cor-secundaria">
+                          Carrinho <small> Clique em finalizar compra para efetuar o seu pedido.</small>
+                       </h1>
+                    </div>
+                 </div>
+                 <div class="caixa-sombreada">
+                    <table class="table tabela-carrinho border-alpha">
+                       <thead>
+                          <th colspan="2" width="45%">
+                             <h6 class="cor-secundaria">Produto</h6>
+                          </th>
+                          <th width="15%">
+                             <h6 class="cor-secundaria">Preço unitário</h6>
+                          </th>
+                          <th width="15%">
+                             <h6 class="cor-secundaria">Quantidade</h6>
+                          </th>
+                          <th width="15%">
+                             <h6 class="cor-secundaria">Subtotal</h6>
+                          </th>
+                          <th width="10%">
+                             <h6 class="cor-secundaria">Excluir</h6>
+                          </th>
+                       </thead>
+                       <tr data-produto-id="4026744" data-produto-quantidade="1">
+                          <td class="sem-borda conteiner-imagem">
+                             <div class="imagem">
+                                <a href="https://www.gismar.com.br/par-rede-gol-futsal-fio-4mm-nylon-futebol-de-salao">
+                                <img src="https://cdn.awsli.com.br/64x64/99/99834/produto/4026744/b72313008a.jpg" alt="Par de Rede para Trave de Gol Futsal Fio 4mm Nylon Futebol de Salão" /></a>
+                             </div>
+                          </td>
+                          <td class="sem-borda">
+                             <div class="produto-info">
+                                <a href="https://www.gismar.com.br/par-rede-gol-futsal-fio-4mm-nylon-futebol-de-salao" class="cor-secundaria">
+                                Par de Rede para Trave de Gol Futsal Fio 4mm Nylon Futebol de Salão
+                                </a>
+                                <ul>
+                                   <li>
+                                      <span>
+                                      SKU:
+                                      <strong>
+                                      PG011
+                                      </strong>
+                                      </span>
+                                   </li>
+                                   <li>
+                                      <span>
+                                      Estoque:
+                                      <strong>
+                                      Disponível
+                                      </strong>
+                                      </span>
+                                   </li>
+                                </ul>
+                             </div>
+                          </td>
+                          <td class="hidden-phone">
+                             <div class="preco-produto destaque-parcela ">
+                                <div>
+                                   <strong class="preco-promocional cor-principal ">
+                                   R$ 139,00
+                                   </strong>
+                                </div>
+                             </div>
+                          </td>
+                          <td class="clearfix">
+                             <form action="https://www.gismar.com.br/carrinho/produto/4026744/atualizar" method="post">
+                                <div class="quantidade">
+                                   <a href="https://www.gismar.com.br/carrinho/produto/4026744/atualizar/0" class="cor-secundaria icon-minus"></a>
+                                   <input type="text" class="input-mini" name="quantidade" value="1" autocomplete="off"/>
+                                   <a href="https://www.gismar.com.br/carrinho/produto/4026744/atualizar/2" class="cor-secundaria icon-plus"></a>
+                                   <button class="botao principal pequeno atualizar-quantidade">Atualizar quantidade</button>
+                                </div>
+                             </form>
+                          </td>
+                          <td>
+                             <div class="preco-produto">
+                                <strong class="preco-promocional cor-principal titulo">
+                                R$ 139,00
+                                </strong>
+                             </div>
+                          </td>
+                          <td>
+                             <div class="excluir">
+                                <a href="https://www.gismar.com.br/carrinho/produto/4026744/remover" class="icon-trash cor-secundaria"></a>
+                             </div>
+                          </td>
+                       </tr>
+                       <tr data-produto-id="4392517" data-produto-quantidade="400">
+                          <td class="sem-borda conteiner-imagem">
+                             <div class="imagem">
+                                <a href="https://www.gismar.com.br/rede-de-protecao-esportiva-sob-medida-fio-4-malha-8cm">
+                                <img src="https://cdn.awsli.com.br/64x64/99/99834/produto/4392499/a51ac9fa61.jpg" alt="Rede de Proteção Esportiva Sob Medida Para Campo/Quadra de Futsal, Futebol, Society Fio 4 Malha 8cm Nylon" /></a>
+                             </div>
+                          </td>
+                          <td class="sem-borda">
+                             <div class="produto-info">
+                                <a href="https://www.gismar.com.br/rede-de-protecao-esportiva-sob-medida-fio-4-malha-8cm" class="cor-secundaria">
+                                Rede de Proteção Esportiva Sob Medida Para Campo/Quadra de Futsal, Futebol, Society Fio 4 Malha 8cm Nylon
+                                </a>
+                                <ul>
+                                   <li>
+                                      <span>
+                                      SKU:
+                                      <strong>
+                                      M005Azul
+                                      </strong>
+                                      </span>
+                                   </li>
+                                   <li>
+                                      <span>
+                                      Estoque:
+                                      <strong>
+                                      15 dias úteis
+                                      </strong>
+                                      </span>
+                                   </li>
+                                   <li>
+                                      <span>
+                                      Cor:
+                                      <span class="atributo-cor-carrinho">
+                                      <span style="background-color: #1717FF;"></span>
+                                      </span>
+                                      </span>
+                                   </li>
+                                </ul>
+                             </div>
+                          </td>
+                          <td class="hidden-phone">
+                             <div class="preco-produto destaque-parcela ">
+                                <div>
+                                   <strong class="preco-promocional cor-principal ">
+                                   R$ 12,59
+                                   </strong>
+                                </div>
+                             </div>
+                          </td>
+                          <td class="clearfix">
+                             <form action="https://www.gismar.com.br/carrinho/produto/4392517/atualizar" method="post">
+                                <div class="quantidade">
+                                   <a href="https://www.gismar.com.br/carrinho/produto/4392517/atualizar/399" class="cor-secundaria icon-minus"></a>
+                                   <input type="text" class="input-mini" name="quantidade" value="400" autocomplete="off"/>
+                                   <a href="https://www.gismar.com.br/carrinho/produto/4392517/atualizar/401" class="cor-secundaria icon-plus"></a>
+                                   <button class="botao principal pequeno atualizar-quantidade">Atualizar quantidade</button>
+                                </div>
+                             </form>
+                          </td>
+                          <td>
+                             <div class="preco-produto">
+                                <strong class="preco-promocional cor-principal titulo">
+                                R$ 5.036,00
+                                </strong>
+                             </div>
+                          </td>
+                          <td>
+                             <div class="excluir">
+                                <a href="https://www.gismar.com.br/carrinho/produto/4392517/remover" class="icon-trash cor-secundaria"></a>
+                             </div>
+                          </td>
+                       </tr>
+                       <tr class="hidden-phone bg-dark">
+                          <td colspan="4">&nbsp;</td>
+                          <td colspan="2">
+                             <div class="subtotal">
+                                <span>Subtotal: </span>
+                                <strong class="titulo cor-principal" data-subtotal-valor="5175.0">
+                                R$ 5.175,00
+                                </strong>
+                             </div>
+                          </td>
+                       </tr>
+                       <tr class="hidden-phone bg-dark">
+                          <td colspan="4">
+                             <form class="form-horizontal" id="formCalcularFrete">
+                                <div class="control-group">
+                                   <label class="control-label" for="calcularFrete">
+                                   <b class="cor-secundaria">Calcule o frete:</b>
+                                   </label>
+                                   <div class="controls text-left">
+                                      <div class="input-append">
+                                         <input type="tel" name="cep_destino" id="calcularFrete" class="input-small input-cep" value="">
+                                         <button class="btn"><i class="icon-truck"></i>Calcular</button>
+                                      </div>
+                                      <span class="help-inline">
+                                      <a href="https://www.gismar.com.br/nao_sei_o_cep/" target="_blank"><i class="icon-question-sign"></i>Não sei meu CEP</a>
+                                      </span>
+                                   </div>
+                                </div>
+                             </form>
+                          </td>
+                          <td colspan="2">
+                             <div class="formas-envio">
+                                <ul>
+                                </ul>
+                             </div>
+                          </td>
+                       </tr>
+                       <tr class="bg-dark">
+                          <td colspan="4">
+                             <form class="form-horizontal" action="https://www.gismar.com.br/carrinho/cupom/validar" method="post">
+                                <div class="control-group">
+                                   <label class="control-label" for="usarCupom"><b class="cor-secundaria">Cupom de desconto:</b></label>
+                                   <div class="controls text-left">
+                                      <div class="input-append">
+                                         <input type="text" name="cupom" id="usarCupom" class="input-small">
+                                         <button class="btn">Usar cupom</button>
+                                      </div>
+                                   </div>
+                                </div>
+                             </form>
+                          </td>
+                          <td colspan="2"></td>
+                       </tr>
+                       <tr class="bg-dark">
+                          <td colspan="6" class="line-18">
+                             <div class="total">
+                                <span>Total:</span>
+                                <strong class="titulo cor-principal valor-total" data-total-valor="5.175,00">
+                                R$ 5.175,00
+                                </strong>
+                             </div>
+                             <div class="valores-descontos">
+                                <div class="descontos parcelas">
+                                   <span>
+                                   ou em até <strong>6x</strong> de <strong>R$ 862,50</strong> sem juros
+                                   </span>
+                                </div>
+                             </div>
+                          </td>
+                       </tr>
+                    </table>
+                 </div>
+                 <div id="li-box-payment-minimum-value" data-value="0" class="alert" style="display: none;font-size: 14px; padding: 10px; text-align: center;">
+                    <i class="icon-info-sign"></i>
+                    <strong style="color: #ae8640;">
+                    Adicione mais
+                    <span class="li-box-payment-minimum-value-left">
+                    R$-5.175,00
+                    </span>
+                    ao carrinho
+                    </strong>
+                    para poder finalizar a compra.
+                 </div>
+                 <form action="https://www.gismar.com.br/checkout/redirect/" method="post">
+                    <div class="acao-editar row-fluid">
+                       <div class="span12">
+                          <a href="https://www.gismar.com.br/" class="botao">Continuar comprando</a>
+                          <button class="botao principal grande"><i class="icon-ok"></i>Finalizar compra</button>
+                       </div>
+                       <div class="selo-ssl hidden-phone">
+                          <img src="https://cdn.awsli.com.br/production/static/img/struct/stamp_encryptssl_cart.png" alt="Compra 100% Segura" />
+                       </div>
+                    </div>
+                 </form>
+              </div>
+           </div>
+           <div class="secao-secundaria">
+           </div>
+        </div>
+     </div>
+     <div id="rodape">
+        <div style="background-color: #fff; border-top: 1px solid #ddd; position: relative; z-index: 10; font-size: 11px; display: block !important;">
+           <div class="conteiner">
+              <div class="row-fluid">
+                 <div class="span9 span12" style="text-align: center; min-height: 20px; width: 100%;">
+                    <p style="margin-bottom: 0;">
+                       Gismar Indústria e Comércio de Redes Têxteis Ltda - CNPJ: 56.757.156/0001-76
+                       &copy; Todos os direitos reservados. 2020
+                    </p>
+                 </div>
+                 <div style="min-height: 30px; text-align: center; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; float: left; opacity: 1 !important; display: block !important; visibility: visible !important; height: 40px !important; width: 100% !important; margin: 0 !important; position: static !important;">
+                    <a href="https://www.lojaintegrada.com.br?utm_source=lojas&utm_medium=rodape&utm_campaign=gismar.com.br" title="Loja Integrada - Plataforma de loja virtual." target="_blank" style="opacity: 1 !important; display: inline-block !important; visibility: visible !important; margin: 0 !important; position: static !important; overflow: visible !important;">
+                    <img src="https://cdn.awsli.com.br/production/static/whitelabel/lojaintegrada/img/logo-rodape-loja-pro.png?v=cafcf5f" alt="Logomarca Loja Integrada" style="opacity: 1 !important; display: inline !important; visibility: visible !important; margin: 0 !important; position: static !important; max-width: 1000px !important; max-height: 1000px !important; width: auto !important; height: auto !important;" />
+                    </a>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+  <div id="barraTopo" class="hidden-phone">
+     <div class="conteiner">
+        <div class="row-fluid">
+           <div class="span3 hidden-phone">
+              <h4 class="titulo">
+                 <a href="https://www.gismar.com.br/" title="GISMAR REDES" class="cor-secundaria">GISMAR REDES</a>
+              </h4>
+           </div>
+           <div class="span3 hidden-phone">
+              <div class="canais-contato">
+                 <ul>
+                    <li><a href="#modalContato" data-toggle="modal" data-target="#modalContato">
+                       <i class="icon-comment"></i>Fale Conosco</a>
+                    </li>
+                    <li>
+                       <a href="#modalContato" data-toggle="modal" data-target="#modalContato">
+                       <i class="icon-phone"></i>Tel: (11) 2079-2309
+                       </a>
+                    </li>
+                 </ul>
+              </div>
+           </div>
+           <div class="span6">
+              <div class="row-fluid">
+                 <div class="busca borda-alpha span6">
+                    <form action="/buscar" method="get">
+                       <input type="text" name="q" placeholder="Digite o que você procura" />
+                       <button class="botao botao-busca botao-input icon-search fundo-secundario"></button>
+                    </form>
+                 </div>
+                 <div class="span6 hidden-phone">
+                    <div class="carrinho ">
+                       <a href="https://www.gismar.com.br/carrinho/index">
+                       <i class="icon-shopping-cart fundo-principal"></i>
+                       <strong class="qtd-carrinho titulo cor-secundaria">2</strong>
+                       <span>
+                       <b class="titulo cor-secundaria"><span>Produtos no carrinho</span></b>
+                       </span>
+                       <span class="titulo cor-secundaria vazio-text">Carrinho vazio</span>
+                       </a>
+                       <div class="carrinho-interno-ajax">
+                          <div class="carrinho-interno borda-principal">
+                             <ul>
+                                <li>
+                                   <div class="preco-produto destaque-parcela ">
+                                      <div>
+                                         <strong class="preco-promocional cor-principal ">
+                                         R$ 139,00
+                                         </strong>
+                                      </div>
+                                   </div>
+                                   <a href="https://www.gismar.com.br/par-rede-gol-futsal-fio-4mm-nylon-futebol-de-salao" class="imagem-produto">
+                                   <img src="https://cdn.awsli.com.br/64x64/99/99834/produto/4026744/b72313008a.jpg" alt="Par de Rede para Trave de Gol Futsal Fio 4mm Nylon Futebol de Salão" />
+                                   </a>
+                                   <a href="https://www.gismar.com.br/par-rede-gol-futsal-fio-4mm-nylon-futebol-de-salao" class="nome-produto cor-secundaria">
+                                   Par de Rede para Trave de Gol Futsal Fio 4mm Nylon Futebol de Salão
+                                   </a>
+                                   <div class="produto-sku hide">M005Azul</div>
+                                </li>
+                                <li>
+                                   <div class="preco-produto destaque-parcela ">
+                                      <div>
+                                         <strong class="preco-promocional cor-principal ">
+                                         R$ 12,59
+                                         </strong>
+                                      </div>
+                                   </div>
+                                   <a href="https://www.gismar.com.br/rede-de-protecao-esportiva-sob-medida-fio-4-malha-8cm" class="imagem-produto">
+                                   <img src="https://cdn.awsli.com.br/64x64/99/99834/produto/4392499/a51ac9fa61.jpg" alt="Rede de Proteção Esportiva Sob Medida Para Campo/Quadra de Futsal, Futebol, Society Fio 4 Malha 8cm Nylon" />
+                                   </a>
+                                   <a href="https://www.gismar.com.br/rede-de-protecao-esportiva-sob-medida-fio-4-malha-8cm" class="nome-produto cor-secundaria">
+                                   Rede de Proteção Esportiva Sob Medida Para Campo/Quadra de Futsal, Futebol, Society Fio 4 Malha 8cm Nylon
+                                   </a>
+                                   <div class="produto-sku hide">M005Azul</div>
+                                </li>
+                             </ul>
+                             <div class="carrinho-rodape">
+                                <span class="carrinho-info">
+                                <i>2 produtos no carrinho</i>
+                                <span class="carrino-total">
+                                Total: <strong class="titulo cor-principal">R$ 5.175,00</strong>
+                                </span>
+                                </span>
+                                <a href="https://www.gismar.com.br/carrinho/index" class="botao principal">
+                                <i class="icon-shopping-cart"></i>Ir para o carrinho
+                                </a>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+  <!--googleoff: all-->
+  <div id="modalWindow" class="modal hide">
+     <div class="modal-body">
+        <div class="modal-body">
+           Carregando conteúdo, aguarde...
+        </div>
+     </div>
+  </div>
+  <div id="modalAlerta" class="modal hide">
+     <div class="modal-body"></div>
+     <div class="modal-footer">
+        <a href="" data-dismiss="modal" class="botao principal" rel="nofollow">Fechar</a>
+     </div>
+  </div>
+  <div id="modalContato" class="modal hide" tabindex="-1" aria-labelledby="modalContatoLabel" aria-hidden="true">
+     <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+        <span class="titulo cor-secundaria">Fale Conosco</span>
+        Preencha o formulário abaixo.
+     </div>
+     <form action="/contato/popup/" method="post" class="form-horizontal">
+        <div class="modal-body borda-principal">
+           <div class="contato-loading">
+              <i class="icon-spin icon-refresh"></i>
+           </div>
+        </div>
+     </form>
+  </div>
+  <div id="modalNewsletter" class="hide">
+     <div class="row-fluid">
+        <div class="span">
+           <div class="componente newsletter borda-principal">
+              <div class="interno">
+                 <span class="titulo cor-secundaria">
+                 <i class="icon-envelope-alt"></i>Newsletter
+                 </span>
+                 <div class="interno-conteudo">
+                    <p class="texto-newsletter newsletter-cadastro">Inscreva-se na nossa newsletter para receber nossas ofertas \o/</p>
+                    <div class="newsletter-cadastro input-conteiner">
+                       <input type="text" name="email" placeholder="Digite seu email" />
+                       <button class="botao botao-input fundo-principal icon-chevron-right newsletter-assinar" data-action="https://www.gismar.com.br/newsletter/assinar/"></button>
+                    </div>
+                    <div class="newsletter-confirmacao hide">
+                       <i class="icon-ok icon-3x"></i>
+                       <span>Seu cadastro foi realizado com sucesso em nossa newsletter.</span>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+  <div id="AdicionarFavoritoSucessoModal" class="modal hide">
+     <div class="modal-header">
+        <span>Favorito adicionado</span>
+     </div>
+     <div class="modal-body">
+        O produto foi adicionado com sucesso à sua <strong>Lista de Desejos</strong>.
+     </div>
+     <div class="modal-footer">
+        <a class="botao" data-dismiss="modal" aria-hidden="true">Fechar</a>
+        <a class="botao principal" href="https://www.gismar.com.br/conta/favorito/listar">Visualizar Lista de Desejos</a>
+     </div>
+  </div>
+  <div id="AdicionarFavoritoErroModal" class="modal hide">
+     <div class="modal-header">
+        <span class="titulo cor-secundaria">Erro ao adicionar favorito</span>
+     </div>
+     <div class="modal-body">
+        <p>
+           O produto não foi adicionado com sucesso ao seus favoritos, por favor tente mais tarde.
+           para visualizar a lista de favoritos clique <a href="https://www.gismar.com.br/conta/favorito/listar">aqui</a>.
+        </p>
+     </div>
+     <div class="modal-footer">
+        <a class="botao" data-dismiss="modal" aria-hidden="true">Fechar</a>
+        <a class='botao principal' style="display: none;" id="AdicionarFavoritoLogin">Logar</a>
+     </div>
+  </div>
+  <div id="avise-me-cadastro" style="display: none;">
+     <div class="avise-me">
+        <form action="" method="POST" class="avise-me-form">
+           <span class="avise-tit">
+           Ops!
+           </span>
+           <span class="avise-descr">
+           Esse produto encontra-se indisponível.<br />
+           Deixe seu e-mail que avisaremos quando chegar.
+           </span>
+           <div class="avise-input">
+              <div class="controls controls-row">
+                 <input class="span5 avise-nome" name="avise-nome" type="text" placeholder="Digite seu nome" />
+                 <label class="span7">
+                 <i class="icon-envelope avise-icon"></i>
+                 <input class="span12 avise-email" name="avise-email" type="email" placeholder="Digite seu e-mail" />
+                 </label>
+              </div>
+           </div>
+           <div class="avise-btn">
+              <input type="submit" value="Avise-me quando disponível" class="botao fundo-secundario btn-block" />
+           </div>
+        </form>
+     </div>
+  </div>
+  <div id="avise-me-sucesso" style="display: none;">
+     <span class="avise-suc-tit cor-principal">
+     Obrigado!
+     </span>
+     <span class="avise-suc-descr">
+     Você receberá um e-mail de notificação, assim que esse produto estiver disponível em estoque
+     </span>
+  </div>
+  <!--googleon: all-->
+  <ul id="selo-site_sincero">
+     <li>
+        <script type="text/javascript" src="//certificate.trustvox.com.br/widget.js"></script>
+        <div data-trustvox-certificate-fixed></div>
+     </li>
+  </ul>
+
+  
+</body>
+</html>
