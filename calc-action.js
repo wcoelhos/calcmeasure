@@ -31,7 +31,6 @@ class enableCalcPageRede {
 
 	recordAreas (target) {
 		var sku = $(target).parents('.acoes-produto').find('meta[itemprop=sku]').prop('content')
-		// if (!sku) sku = $(target).parents('.principal').find('span[itemprop=sku]').text()
 		if (!sku) {
 			var classes = $(target).parents('.acoes-produto').attr('class').split(/\s+/)
 			sku = classes.find(function (_class) { return _class.startsWith("SKU-") }).replace("SKU-", "")
@@ -83,7 +82,11 @@ class enableCalcPageGol {
 
 	recordAreas (target) {
 		var sku = $(target).parents('.acoes-produto').find('meta[itemprop=sku]').prop('content')
-		if (!sku) sku = $(target).parents('.principal').find('span[itemprop=sku]').text()
+		if (!sku) {
+			var classes = $(target).parents('.acoes-produto').attr('class').split(/\s+/)
+			sku = classes.find(function (_class) { return _class.startsWith("SKU-") }).replace("SKU-", "")
+		}
+
 
 		if (sku) {
 			var areas = this.calc.getTextAreas()
