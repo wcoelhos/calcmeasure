@@ -1,3 +1,6 @@
+/*
+enableCalcPageRede
+*/
 class enableCalcPageRede {
  
 	constructor() {
@@ -27,8 +30,10 @@ class enableCalcPageRede {
 	}
 
 	recordAreas (target) {
-		var sku = $(target).parents('.acoes-produto').find('meta[itemprop=sku]').prop('content')
-		if (!sku) sku = $(target).parents('.principal').find('span[itemprop=sku]').text()
+		// var sku = $(target).parents('.acoes-produto').find('meta[itemprop=sku]').prop('content')
+		// if (!sku) sku = $(target).parents('.principal').find('span[itemprop=sku]').text()
+		var sku = $('meta[itemprop=sku]').eq(0).prop('content')
+		if (!sku) sku = $('span[itemprop=sku]').eq(0).text()
 
 		if (sku) {
 			var areas = this.calc.getTextAreas()
@@ -43,6 +48,9 @@ class enableCalcPageRede {
 	}
 }
 
+/*
+enableCalcPageGol
+*/
 class enableCalcPageGol {
  
 	constructor(type) {
@@ -88,6 +96,9 @@ class enableCalcPageGol {
 	}
 }
 
+/*
+enableCheckoutPage
+*/
 class enableCheckoutPage {
 
 	constructor() {
